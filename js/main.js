@@ -123,6 +123,12 @@ const films = [
                 desc: "Hands-on instrument and control work, four years into training.",
         },
         {
+                slug: "takeoff-training-republic-2019",
+                title: "Takeoff Training",
+                meta: "12 Aug 2019 · Republic Airport, Farmingdale",
+                desc: "A full takeoff training session — taxi, run-up, and climb-out from Republic Airport.",
+        },
+        {
                 slug: "farmingdale-edgartown-2019",
                 title: "Cross-Country: Farmingdale → Edgartown",
                 meta: "31 Aug 2019 · with Instructor Alfred James",
