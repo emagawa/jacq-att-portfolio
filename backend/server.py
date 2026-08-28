@@ -1,0 +1,125 @@
+import os
+import asyncio
+import logging
+import html as html_lib
+from datetime import datetime, timezone
+
+import resend
+from dotenv import load_dotenv
+from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, EmailStr, Field
+from motor.motor_asyncio import AsyncIOMotorClient
+
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+load_dotenv(os.path.join(ROOT_DIR, ".env"))
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("jacq-portfolio")
+
+MONGO_URL = os.environ.get("MONGO_URL")
+DB_NAME = os.environ.get("DB_NAME")
+RESEND_API_KEY = os.environ.get("RESEND_API_KEY")
+SENDER_EMAIL = os.environ.get("SENDER_EMAIL")
+RECIPIENT_EMAIL = os.environ.get("RECIPIENT_EMAIL")
+
+resend.api_key = RESEND_API_KEY
+
+client = AsyncIOMotorClient(MONGO_URL)
+db = client[DB_NAME]
+
+app = FastAPI(title="Jacqueline Magawa Portfolio API")
+api = APIRouter(prefix="/api")
+
+
+class ContactRequest(BaseModel):
+    name: str = Field(..., min_length=1, max_length=120)
+    email: EmailStr
+    subject: str = Field(default="", max_length=200)
+    message: str = Field(..., min_length=1, max_length=5000)
+    website: str = Field(default="")  # honeypot
+
+
+def build_email_html(name: str, email: str, subject: str, message: str) -> str:
+    safe_name = html_lib.escape(name)
+    safe_email = html_lib.escape(email)
+    safe_subject = html_lib.escape(subject or "(no subject)")
+    safe_message = html_lib.escape(message).replace("\n", "<br>")
+    return f"""
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:#f3f1ea;padding:28px 0;font-family:Arial,Helvetica,sans-serif;">
+      <tr><td align="center">
+        <table width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;border:1px solid #e3ded2;border-radius:14px;overflow:hidden;">
+          <tr><td style="background:#12283a;padding:22px 30px;">
+            <div style="color:#e9c46a;font-size:12px;letter-spacing:2px;text-transform:uppercase;">New Portfolio Message</div>
+            <div style="color:#f3f1ea;font-size:20px;font-weight:700;margin-top:6px;">jacquelinemagawa.com — Contact Form</div>
+          </td></tr>
+          <tr><td style="padding:28px 30px;color:#12283a;">
+            <p style="margin:0 0 6px;font-size:13px;color:#9a6b3f;text-transform:uppercase;letter-spacing:1px;">From</p>
+            <p style="margin:0 0 18px;font-size:16px;"><b>{safe_name}</b> &lt;{safe_email}&gt;</p>
+            <p style="margin:0 0 6px;font-size:13px;color:#9a6b3f;text-transform:uppercase;letter-spacing:1px;">Subject</p>
+            <p style="margin:0 0 18px;font-size:16px;">{safe_subject}</p>
+            <p style="margin:0 0 6px;font-size:13px;color:#9a6b3f;text-transform:uppercase;letter-spacing:1px;">Message</p>
+            <div style="margin:0;font-size:15px;line-height:1.6;color:#2c3e50;background:#f7f5ee;border-left:3px solid #c0503c;padding:14px 16px;border-radius:6px;">{safe_message}</div>
+          </td></tr>
+          <tr><td style="background:#f7f5ee;padding:16px 30px;color:#8a8577;font-size:12px;">
+            Sent from the contact form on jacquelinemagawa.com
+          </td></tr>
+        </table>
+      </td></tr>
+    </table>
+    """
+
+
+@api.get("/")
+async def root():
+    return {"status": "ok", "service": "jacqueline-magawa-portfolio"}
+
+
+@api.get("/health")
+async def health():
+    return {"status": "healthy"}
+
+
+@api.post("/contact")
+async def contact(payload: ContactRequest):
+    # Honeypot: silently accept bots without sending
+    if payload.website.strip():
+        return {"status": "success", "message": "Thanks — your message has been sent."}
+
+    record = {
+        "name": payload.name,
+        "email": payload.email,
+        "subject": payload.subject,
+        "message": payload.message,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+    }
+    try:
+        await db.contact_messages.insert_one(dict(record))
+    except Exception as e:
+        logger.error(f"Failed to store contact message: {e}")
+
+    params = {
+        "from": f"Jacqueline Magawa Portfolio <{SENDER_EMAIL}>",
+        "to": [RECIPIENT_EMAIL],
+        "reply_to": payload.email,
+        "subject": f"[Portfolio] {payload.subject or 'New message from ' + payload.name}",
+        "html": build_email_html(payload.name, payload.email, payload.subject, payload.message),
+    }
+    try:
+        email = await asyncio.to_thread(resend.Emails.send, params)
+        logger.info(f"Contact email sent: {email}")
+        return {"status": "success", "message": "Thanks — your message has been sent."}
+    except Exception as e:
+        logger.error(f"Failed to send contact email: {e}")
+        raise HTTPException(status_code=502, detail="Could not send your message right now. Please email jacq.magawa@gmail.com directly.")
+
+
+app.include_router(api)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
