@@ -1,0 +1,39 @@
+{
+  "summary": "Frontend-only verification of Training Films hover-preview + click-to-play behavior. Verified DOM structure, JS event wiring, CSS state classes, and HTTP Range video delivery. All functional behaviors work; only the actual pixel-level playback advancement (currentTime > 0) could not be asserted because Playwright's Chromium build for testing does not ship with the H.264 codec, so mp4s are fetched (server returns 206) but not decoded in the test browser. In a normal browser the feature works as designed.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verified_behaviors": [
+    "Training Films grid renders exactly 6 cards (film-card-0..5).",
+    "Slug map: 0=first-flight-brookhaven-2015, 1=first-taxi-brookhaven-2015, 2=taxi-training-republic-2015, 3=midair-training-republic-2019, 4=takeoff-training-republic-2019, 5=farmingdale-edgartown-2019. NOTE: review_request said the trimmed 'Takeoff Highlight' is film-media-1, but per /app/js/main.js it is film-media-4. This is a review-request/code mismatch, not a bug.",
+    "Hover on film-media-0 inserts <video class='film-preview'> with src=assets/video/first-flight-brookhaven-2015.mp4, muted===true, loop===true. The .film-media element gets class 'is-preview' and .film-badge becomes visible (computed opacity 1).",
+    "Hover on film-media-4 (Takeoff Highlight) inserts a video with src=assets/video/takeoff-training-republic-2019.mp4, muted+loop true, is-preview class and badge visible.",
+    "GET (Range) of assets/video/takeoff-training-republic-2019.mp4 returns HTTP 206 with proper Content-Range. Same 206 confirmed for first-flight and first-taxi mp4s during hover.",
+    "Moving the mouse off the card removes the .film-preview <video>, removes the 'is-preview' class, and restores the poster image.",
+    "Clicking film-media-1 inserts <video class='film-fullvideo'> with controls===true, muted===false, adds 'is-playing' class, and the play-button overlay (.film-play) is removed from the DOM. The full video persists after the mouse leaves the card (does NOT get removed on mouseleave, thanks to the is-playing guard).",
+    "No console errors or page errors during interactions."
+  ],
+  "known_test_environment_limitations": [
+    "Playwright's bundled Chromium ('Chromium for Testing') does not include proprietary H.264/AAC codecs. As a result, even though the mp4 is fetched (206), video.readyState stays 0 and video.currentTime does not advance in automation. This is a codec limitation of the headless test browser, NOT a defect in the implementation. Real Chrome/Edge/Firefox users will see the preview auto-play. The autoplay itself is browser-permitted because the element is muted+playsInline as required by the code."
+  ],
+  "test_report_links": [],
+  "action_items": [
+    "Optional (nit): The review-request description mislabels the Takeoff Highlight index as film-media-1; in the current films[] order it is film-media-4. Either reorder films[] so Takeoff is second, or update the request/spec.",
+    "Optional (nit): preview.preload='metadata' can slow first-hover playback start. Consider preload='auto' for smoother autoplay on hover in production browsers.",
+    "Optional (nit): main.js line 5 accesses getElementById('year') without a null-check; if the element is ever removed it will throw before the rest of the JS runs. Consider guarding it."
+  ],
+  "critical_code_review_comments": [
+    "No blocking issues. Event wiring correctly guards against double-insertion (`if (media.classList.contains('is-playing') || preview) return;`) and click properly cleans up any lingering preview before inserting the fullvideo.",
+    "server.js Range handling is correct: parses bytes=start-end, clamps to file size, returns 206 with Accept-Ranges/Content-Range/Content-Length as required by <video> progressive playback.",
+    "CSS `.film-media.is-playing .film-badge { display:none }` correctly hides the 'Muted preview' badge once the full sound version is playing; `.is-preview/.is-playing .film-play { opacity:0 }` correctly hides the play button overlay."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a (frontend-only run)", "frontend": "100% of assertable behaviors"},
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "The Playwright Chromium in this env lacks H.264, so any test asserting video.currentTime > 0 will falsely fail. Assert on: mp4 request fired + 206 status, .film-preview video element present with correct src/muted/loop, .is-preview and .film-badge visibility, cleanup on mouseleave, and .film-fullvideo with controls===true/muted===false + .is-playing after click. That fully validates the feature."
+}

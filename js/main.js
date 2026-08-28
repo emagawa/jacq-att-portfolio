@@ -143,10 +143,11 @@ films.forEach((f, i) => {
         card.setAttribute("data-testid", `film-card-${i}`);
         card.innerHTML = `
     <div class="film-media" data-slug="${f.slug}" data-testid="film-media-${i}">
-      <img src="assets/video/posters/${f.slug}.jpg" alt="${f.title}" loading="lazy">
+      <img class="film-poster" src="assets/video/posters/${f.slug}.jpg" alt="${f.title}" loading="lazy">
       <div class="film-play">
         <svg viewBox="0 0 24 24" fill="rgba(255,255,255,0.95)"><circle cx="12" cy="12" r="11" fill="rgba(8,21,33,0.5)" stroke="rgba(255,255,255,0.85)" stroke-width="1"/><path d="M10 8l6 4-6 4V8z"/></svg>
       </div>
+      <span class="film-badge">Muted preview · click for sound</span>
     </div>
     <div class="film-body">
       <div class="card-meta">${f.meta}</div>
@@ -155,19 +156,54 @@ films.forEach((f, i) => {
     </div>`;
         filmsGrid.appendChild(card);
         observeReveal(card, i);
-});
 
-filmsGrid.addEventListener("click", (e) => {
-        const media = e.target.closest(".film-media");
-        if (!media) return;
-        const slug = media.dataset.slug;
-        const video = document.createElement("video");
-        video.src = `assets/video/${slug}.mp4`;
-        video.controls = true;
-        video.autoplay = true;
-        video.playsInline = true;
-        media.innerHTML = "";
-        media.appendChild(video);
+        const media = card.querySelector(".film-media");
+        const slug = f.slug;
+        let preview = null;
+
+        media.addEventListener("mouseenter", () => {
+                if (media.classList.contains("is-playing") || preview) return;
+                preview = document.createElement("video");
+                preview.src = `assets/video/${slug}.mp4`;
+                preview.muted = true;
+                preview.loop = true;
+                preview.playsInline = true;
+                preview.preload = "auto";
+                preview.className = "film-preview";
+                media.appendChild(preview);
+                media.classList.add("is-preview");
+                preview.play().catch(() => {});
+        });
+
+        media.addEventListener("mouseleave", () => {
+                if (media.classList.contains("is-playing")) return;
+                if (preview) {
+                        preview.pause();
+                        preview.remove();
+                        preview = null;
+                }
+                media.classList.remove("is-preview");
+        });
+
+        media.addEventListener("click", () => {
+                if (media.classList.contains("is-playing")) return;
+                if (preview) {
+                        preview.pause();
+                        preview.remove();
+                        preview = null;
+                }
+                const video = document.createElement("video");
+                video.src = `assets/video/${slug}.mp4`;
+                video.controls = true;
+                video.autoplay = true;
+                video.playsInline = true;
+                video.className = "film-fullvideo";
+                media.querySelector(".film-play")?.remove();
+                media.classList.remove("is-preview");
+                media.classList.add("is-playing");
+                media.appendChild(video);
+                video.play().catch(() => {});
+        });
 });
 
 /* ---------- Gallery ---------- */
