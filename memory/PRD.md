@@ -32,3 +32,12 @@ Finish and polish the existing static portfolio for Jacqueline Magawa (aviation 
 - P1: Verify Resend domain → route contact emails to jacq.magawa@gmail.com and set a branded sender.
 - P2: Deploy to production when ready.
 - P2: Optional CV/résumé preview, SEO/OpenGraph meta + social share image.
+
+## Update (2026-06) — feature additions
+- Résumé Preview: inline PDF modal opened from hero ('Preview Résumé') and About ('Preview Résumé'); download available in-modal, in About, and in nav. (tested 100%)
+- Social Share Card: generated on-brand 1200x630 image at assets/img/og-image.jpg + full Open Graph & Twitter meta tags in index.html. (tested 100%)
+- Deployment readiness: PASS (deployment_agent) — only cosmetic note that OG/canonical URLs point to preview domain; update to production domain after go-live.
+
+## Go-live notes
+- Deploy via Emergent Deploy button (50 credits/mo). After deploy, update og:url / og:image / canonical in index.html <head> to the production domain.
+- Resend still in test mode (delivers to account owner only); verify a domain to deliver to jacq.magawa@gmail.com.

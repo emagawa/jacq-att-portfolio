@@ -252,6 +252,39 @@ document.addEventListener("keydown", (e) => {
         if (e.key === "ArrowRight") showRelative(1);
 });
 
+/* ---------- Résumé preview modal ---------- */
+const resumeModal = document.getElementById("resumeModal");
+const resumeFrameWrap = document.getElementById("resumeFrameWrap");
+const RESUME_PDF = "assets/resume-jacqueline-magawa.pdf";
+
+function openResume() {
+        if (!resumeFrameWrap.querySelector("iframe")) {
+                const frame = document.createElement("iframe");
+                frame.src = `${RESUME_PDF}#view=FitH`;
+                frame.title = "Résumé — Jacqueline Magawa";
+                frame.setAttribute("data-testid", "resume-iframe");
+                resumeFrameWrap.appendChild(frame);
+        }
+        resumeModal.classList.add("open");
+        document.body.style.overflow = "hidden";
+}
+function closeResume() {
+        resumeModal.classList.remove("open");
+        document.body.style.overflow = "";
+}
+
+document.querySelectorAll("[data-resume-open]").forEach((btn) => {
+        btn.addEventListener("click", openResume);
+});
+document.getElementById("resumeClose").addEventListener("click", closeResume);
+resumeModal.addEventListener("click", (e) => {
+        if (e.target === resumeModal) closeResume();
+});
+document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && resumeModal.classList.contains("open"))
+                closeResume();
+});
+
 /* ---------- Contact form -> backend (Resend email) ---------- */
 const contactForm = document.getElementById("contactForm");
 const cfNote = document.getElementById("cfNote");

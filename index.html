@@ -12,6 +12,52 @@
                         content="Jacqueline Magawa — Aviation Management graduate and Computer Science / Cybersecurity student at University at Albany. Flight training log, technical projects, credentials, and contact."
                 />
                 <meta name="theme-color" content="#13293b" />
+                <meta name="author" content="Jacqueline Magawa" />
+                <link
+                        rel="canonical"
+                        href="https://8543c06b-ba8e-4866-97cc-a7adc4679f14.preview.emergentagent.com/"
+                />
+
+                <!-- Open Graph / LinkedIn / Facebook -->
+                <meta property="og:type" content="website" />
+                <meta
+                        property="og:url"
+                        content="https://8543c06b-ba8e-4866-97cc-a7adc4679f14.preview.emergentagent.com/"
+                />
+                <meta
+                        property="og:title"
+                        content="Jacqueline Magawa — Aviation Enthusiast & Cybersecurity / CS Student"
+                />
+                <meta
+                        property="og:description"
+                        content="Aviation Management graduate turned Computer Science & Cybersecurity student at University at Albany. Flight log, projects, credentials, and contact."
+                />
+                <meta
+                        property="og:image"
+                        content="https://8543c06b-ba8e-4866-97cc-a7adc4679f14.preview.emergentagent.com/assets/img/og-image.jpg"
+                />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+                <meta
+                        property="og:image:alt"
+                        content="Jacqueline Magawa — Aviation Enthusiast & Cybersecurity / CS Student"
+                />
+                <meta property="og:site_name" content="Jacqueline Magawa" />
+
+                <!-- Twitter / X -->
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta
+                        name="twitter:title"
+                        content="Jacqueline Magawa — Aviation Enthusiast & Cybersecurity / CS Student"
+                />
+                <meta
+                        name="twitter:description"
+                        content="Aviation Management graduate turned Computer Science & Cybersecurity student at University at Albany."
+                />
+                <meta
+                        name="twitter:image"
+                        content="https://8543c06b-ba8e-4866-97cc-a7adc4679f14.preview.emergentagent.com/assets/img/og-image.jpg"
+                />
                 <link rel="icon" href="assets/img/favicon.png" type="image/png" />
                 <link
                         rel="icon"
@@ -100,13 +146,13 @@
                                                 pre-flight walkaround or a security audit.
                                         </p>
                                         <div class="hero-actions" data-anim>
-                                                <a
-                                                        href="assets/resume-jacqueline-magawa.pdf"
-                                                        download
+                                                <button
+                                                        type="button"
                                                         class="btn btn-rust"
-                                                        data-testid="hero-resume-btn"
+                                                        data-resume-open
+                                                        data-testid="hero-resume-preview-btn"
                                                 >
-                                                        Download Résumé
+                                                        Preview Résumé
                                                         <svg
                                                                 width="16"
                                                                 height="16"
@@ -115,9 +161,10 @@
                                                                 stroke="currentColor"
                                                                 stroke-width="2"
                                                         >
-                                                                <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16" />
+                                                                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                                                                <circle cx="12" cy="12" r="3" />
                                                         </svg>
-                                                </a>
+                                                </button>
                                                 <a href="#log" class="btn btn-ghost" data-testid="hero-log-btn"
                                                         >View Flight Log</a
                                                 >
@@ -233,13 +280,23 @@
                                                                 ><span>Academic Excellence</span>
                                                         </li>
                                                 </ul>
-                                                <a
-                                                        href="assets/resume-jacqueline-magawa.pdf"
-                                                        download
-                                                        class="btn btn-rust"
-                                                        data-testid="about-resume-btn"
-                                                        >Download Full Résumé</a
-                                                >
+                                                <div class="panel-actions">
+                                                        <button
+                                                                type="button"
+                                                                class="btn btn-rust"
+                                                                data-resume-open
+                                                                data-testid="about-resume-preview-btn"
+                                                        >
+                                                                Preview Résumé
+                                                        </button>
+                                                        <a
+                                                                href="assets/resume-jacqueline-magawa.pdf"
+                                                                download
+                                                                class="btn btn-ghost"
+                                                                data-testid="about-resume-btn"
+                                                                >Download PDF</a
+                                                        >
+                                                </div>
                                         </div>
                                 </div>
                         </div>
@@ -832,6 +889,36 @@
                                 </div>
                         </div>
                 </footer>
+
+                <!-- Résumé preview modal -->
+                <div class="resume-modal" id="resumeModal" data-testid="resume-modal">
+                        <div class="resume-dialog">
+                                <div class="resume-bar">
+                                        <div class="resume-title">
+                                                <span class="resume-kicker">Résumé</span>
+                                                <b>Jacqueline Magawa</b>
+                                        </div>
+                                        <div class="resume-bar-actions">
+                                                <a
+                                                        href="assets/resume-jacqueline-magawa.pdf"
+                                                        download
+                                                        class="btn btn-rust"
+                                                        data-testid="resume-modal-download-btn"
+                                                        >Download PDF</a
+                                                >
+                                                <button
+                                                        class="resume-close"
+                                                        id="resumeClose"
+                                                        aria-label="Close résumé preview"
+                                                        data-testid="resume-modal-close-btn"
+                                                >
+                                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
+                                                </button>
+                                        </div>
+                                </div>
+                                <div class="resume-frame-wrap" id="resumeFrameWrap"></div>
+                        </div>
+                </div>
 
                 <!-- Lightbox -->
                 <div class="lightbox" id="lightbox">
