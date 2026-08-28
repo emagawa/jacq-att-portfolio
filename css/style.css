@@ -18,7 +18,7 @@
         --line: rgba(19, 41, 59, 0.12);
         --line-strong: rgba(19, 41, 59, 0.22);
 
-        --font-display: "Sora", system-ui, sans-serif;
+        --font-display: "Outfit", system-ui, sans-serif;
         --font-body: "Hanken Grotesk", system-ui, sans-serif;
         --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
@@ -220,7 +220,7 @@ h4 {
 }
 
 .brand img {
-        height: 40px;
+        height: 56px;
         width: auto;
 }
 
@@ -341,14 +341,15 @@ h4 {
 
 .hero h1 {
         font-size: clamp(3.4rem, 9vw, 7.2rem);
-        line-height: 0.92;
-        font-weight: 800;
+        line-height: 0.86;
+        font-weight: 300;
         letter-spacing: -0.03em;
         margin-bottom: 28px;
 }
 
 .hero h1 .rust {
         color: var(--rust);
+        font-weight: 400;
 }
 
 .hero .lede {
@@ -1243,7 +1244,7 @@ h4 {
 }
 
 .footer-brand img {
-        height: 34px;
+        height: 46px;
 }
 
 .footer-socials {
