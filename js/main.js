@@ -124,9 +124,9 @@ const films = [
         },
         {
                 slug: "takeoff-training-republic-2019",
-                title: "Takeoff Training",
+                title: "Takeoff Highlight",
                 meta: "12 Aug 2019 · Republic Airport, Farmingdale",
-                desc: "A full takeoff training session — taxi, run-up, and climb-out from Republic Airport.",
+                desc: "The highlight reel — lineup, takeoff roll, liftoff, and the climb-out over Farmingdale.",
         },
         {
                 slug: "farmingdale-edgartown-2019",
