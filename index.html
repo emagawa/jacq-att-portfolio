@@ -114,21 +114,6 @@
 
                 <!-- ============ HERO ============ -->
                 <section class="hero on-cream" id="home">
-                        <svg
-                                class="hero-line"
-                                viewBox="0 0 1440 220"
-                                fill="none"
-                                preserveAspectRatio="none"
-                                aria-hidden="true"
-                        >
-                                <path
-                                        d="M0 170 C 240 60, 420 60, 640 120 S 1040 210, 1440 70"
-                                        stroke="#c0503c"
-                                        stroke-width="1.4"
-                                        fill="none"
-                                        stroke-dasharray="1 0"
-                                />
-                        </svg>
                         <div class="container">
                                 <div class="hero-copy">
                                         <p class="eyebrow hero-kicker" data-anim>
@@ -148,22 +133,24 @@
                                         <div class="hero-actions" data-anim>
                                                 <button
                                                         type="button"
-                                                        class="btn btn-rust"
+                                                        class="resume-chip"
                                                         data-resume-open
                                                         data-testid="hero-resume-preview-btn"
                                                 >
-                                                        Preview Résumé
-                                                        <svg
-                                                                width="16"
-                                                                height="16"
-                                                                viewBox="0 0 24 24"
-                                                                fill="none"
-                                                                stroke="currentColor"
-                                                                stroke-width="2"
-                                                        >
-                                                                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
-                                                                <circle cx="12" cy="12" r="3" />
-                                                        </svg>
+                                                        <span class="resume-chip-thumb">
+                                                                <img
+                                                                        src="assets/img/resume-thumb.png"
+                                                                        alt="Résumé cover preview"
+                                                                        loading="lazy"
+                                                                />
+                                                        </span>
+                                                        <span class="resume-chip-text">
+                                                                <b>Preview Résumé</b>
+                                                                <span>1-page PDF · click to view</span>
+                                                        </span>
+                                                        <span class="resume-chip-eye">
+                                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" /><circle cx="12" cy="12" r="3" /></svg>
+                                                        </span>
                                                 </button>
                                                 <a href="#log" class="btn btn-ghost" data-testid="hero-log-btn"
                                                         >View Flight Log</a
@@ -183,7 +170,6 @@
                                 </div>
                                 <div class="hero-portrait" data-anim>
                                         <div class="portrait-frame">
-                                                <span class="portrait-label">Student Pilot · Albany, NY</span>
                                                 <img
                                                         src="assets/img/portrait.png"
                                                         alt="Portrait of Jacqueline Magawa"
@@ -196,11 +182,6 @@
                                 <span class="arrow">↓</span><span>Scroll to explore</span>
                         </div>
                 </section>
-
-                <!-- ============ MARQUEE ============ -->
-                <div class="marquee" aria-hidden="true">
-                        <div class="marquee-track" id="marqueeTrack"></div>
-                </div>
 
                 <!-- ============ ABOUT ============ -->
                 <section class="section on-paper" id="about">
@@ -283,11 +264,24 @@
                                                 <div class="panel-actions">
                                                         <button
                                                                 type="button"
-                                                                class="btn btn-rust"
+                                                                class="resume-chip"
                                                                 data-resume-open
                                                                 data-testid="about-resume-preview-btn"
                                                         >
-                                                                Preview Résumé
+                                                                <span class="resume-chip-thumb">
+                                                                        <img
+                                                                                src="assets/img/resume-thumb.png"
+                                                                                alt="Résumé cover preview"
+                                                                                loading="lazy"
+                                                                        />
+                                                                </span>
+                                                                <span class="resume-chip-text">
+                                                                        <b>Preview Résumé</b>
+                                                                        <span>1-page PDF · click to view</span>
+                                                                </span>
+                                                                <span class="resume-chip-eye">
+                                                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" /><circle cx="12" cy="12" r="3" /></svg>
+                                                                </span>
                                                         </button>
                                                         <a
                                                                 href="assets/resume-jacqueline-magawa.pdf"

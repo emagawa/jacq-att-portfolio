@@ -400,38 +400,36 @@ h4 {
 
 .portrait-frame {
         position: relative;
-        width: min(340px, 80%);
-        aspect-ratio: 3 / 4;
-        border: 1.5px dashed var(--line-strong);
-        border-radius: 180px 180px 22px 22px;
-        padding: 14px;
+        width: min(360px, 82%);
+        aspect-ratio: 1 / 1;
+}
+
+.portrait-frame::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        transform: translate(18px, 18px);
+        border: 1.5px solid var(--rust);
+        border-radius: 16px;
+        z-index: 0;
 }
 
 .portrait-frame img {
+        position: relative;
+        z-index: 1;
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 168px 168px 12px 12px;
+        border-radius: 16px;
+        box-shadow: 0 24px 60px rgba(19, 41, 59, 0.18);
         filter: saturate(1.02);
-}
-
-.portrait-label {
-        position: absolute;
-        left: -34px;
-        top: 50%;
-        transform: translateY(-50%) rotate(180deg);
-        writing-mode: vertical-rl;
-        font-family: var(--font-mono);
-        font-size: 0.66rem;
-        letter-spacing: 0.28em;
-        text-transform: uppercase;
-        color: var(--muted);
 }
 
 .portrait-badge {
         position: absolute;
         right: -10px;
-        bottom: 26px;
+        bottom: 22px;
+        z-index: 2;
         background: var(--rust);
         color: var(--cream);
         font-family: var(--font-mono);
@@ -1266,6 +1264,92 @@ h4 {
         color: var(--gold);
 }
 
+/* ============ RÉSUMÉ PREVIEW CHIP ============ */
+.resume-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 10px 18px 10px 10px;
+        cursor: pointer;
+        text-align: left;
+        transition:
+                transform 0.35s var(--ease),
+                box-shadow 0.35s var(--ease),
+                border-color 0.35s var(--ease);
+}
+
+.resume-chip:hover {
+        transform: translateY(-3px);
+        border-color: var(--line-strong);
+        box-shadow: 0 16px 38px rgba(19, 41, 59, 0.14);
+}
+
+.resume-chip-thumb {
+        position: relative;
+        width: 46px;
+        height: 60px;
+        flex-shrink: 0;
+        border-radius: 6px;
+        overflow: hidden;
+        background: #fff;
+        border: 1px solid var(--line);
+        box-shadow: 0 6px 14px rgba(19, 41, 59, 0.18);
+        transform: rotate(-3deg);
+        transition: transform 0.35s var(--ease);
+}
+
+.resume-chip:hover .resume-chip-thumb {
+        transform: rotate(0deg) scale(1.04);
+}
+
+.resume-chip-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+}
+
+.resume-chip-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.25;
+}
+
+.resume-chip-text b {
+        font-family: var(--font-display);
+        font-size: 0.98rem;
+        color: var(--ink);
+        font-weight: 700;
+}
+
+.resume-chip-text span {
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-top: 3px;
+}
+
+.resume-chip-eye {
+        margin-left: 6px;
+        color: var(--rust);
+        display: grid;
+        place-items: center;
+}
+
+.resume-chip-eye svg {
+        width: 18px;
+        height: 18px;
+}
+
+.about-panel .resume-chip {
+        width: 100%;
+}
+
 /* ============ RÉSUMÉ MODAL ============ */
 .resume-modal {
         position: fixed;
@@ -1494,11 +1578,9 @@ h4 {
 
 @keyframes animIn {
         from {
-                opacity: 0;
                 transform: translateY(22px);
         }
         to {
-                opacity: 1;
                 transform: none;
         }
 }

@@ -41,3 +41,9 @@ Finish and polish the existing static portfolio for Jacqueline Magawa (aviation 
 ## Go-live notes
 - Deploy via Emergent Deploy button (50 credits/mo). After deploy, update og:url / og:image / canonical in index.html <head> to the production domain.
 - Resend still in test mode (delivers to account owner only); verify a domain to deliver to jacq.magawa@gmail.com.
+
+## Update (2026-06) — home differentiation + résumé thumbnail
+- Résumé buttons upgraded to a "résumé chip" showing a real cover thumbnail (assets/img/resume-thumb.png, rendered from PDF page 1) in hero + About. (tested 100%)
+- Per user feedback (make it less similar to cathemagawa.com): portrait changed to a SQUARE framed photo with a terracotta offset-outline accent (removed the arched shape), removed the hero curved SVG line, removed the vertical "STUDENT PILOT · ALBANY, NY" portrait label, and removed the scrolling marquee bar.
+- Fixed entrance animation to animate transform only (opacity always 1) so hero content is never left invisible; deep-navy name now renders correctly.
+- PENDING: user will deploy and paste the Emergent deploy URL; then update og:url / og:image / twitter:image / canonical in index.html to that domain.
