@@ -234,10 +234,13 @@ h4 {
 
 .brand-name {
         font-family: var(--font-display);
-        font-weight: 500;
-        font-size: 0.82rem;
-        letter-spacing: 0.02em;
-        color: var(--ink);
+        font-weight: 700;
+        font-size: 1.24rem;
+        letter-spacing: 0.005em;
+        background: linear-gradient(95deg, #1a46c6 0%, #2091d6 55%, #24c4e9 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
 }
 
 .nav-links {
