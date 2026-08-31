@@ -94,7 +94,7 @@ const revealObserver = new IntersectionObserver(
                         }
                 });
         },
-        { threshold: 0.12 },
+        { threshold: 0.01, rootMargin: "0px 0px -8% 0px" },
 );
 
 function observeReveal(el, i = 0) {
@@ -103,6 +103,16 @@ function observeReveal(el, i = 0) {
 }
 
 document.querySelectorAll(".reveal").forEach((el, i) => observeReveal(el, i));
+
+/* Safety fallback: never leave content invisible (e.g. tall elements on small screens) */
+window.addEventListener("load", () => {
+        setTimeout(() => {
+                document.querySelectorAll(".reveal:not(.in)").forEach((el) => {
+                        const r = el.getBoundingClientRect();
+                        if (r.top < window.innerHeight * 1.1) el.classList.add("in");
+                });
+        }, 600);
+});
 
 /* ---------- Training Films ---------- */
 const films = [

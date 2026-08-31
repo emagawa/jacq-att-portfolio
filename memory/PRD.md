@@ -56,3 +56,10 @@ Finish and polish the existing static portfolio for Jacqueline Magawa (aviation 
 ## Update (2026-06) — sections split
 - Split the combined timeline into two sections: Flight Log (02, 7 aviation entries) and a new Education (03, 8 study/work/projects/now entries).
 - Renumbered following sections: Checklist 04, Projects 05, Training Films 06, Gallery 07, Contact 08; alternated section backgrounds; added Education nav link.
+
+
+## Update (2026-06) — mobile responsiveness + iterative polish
+- Fixed mobile bugs (verified by testing_agent, iteration_6, 100%): (1) removed horizontal overflow caused by footer `white-space:nowrap`; (2) hamburger close-X now cream (`.nav-toggle.open span { background: var(--cream) }`) so it's visible on the dark slide-in menu; (3) footer centered on mobile (`.footer-inner` column + center); (4) reveal observer hardened (threshold 0.01, rootMargin, plus window-load safety fallback) so no `.reveal` tile stays invisible.
+- Layout/typography tweaks per reference cathemagawa.com: container max-width 1536px + 80px side padding (responsive 40/22px); nav links 14px/500/1.68px; footer copyright 15px + tagline (IBM Plex Sans style 14px/500, rgb(174,184,192)); back-to-top orange button (#f5842a, 46px circle) added.
+- Contact card: added "Preview Résumé" button (rust) next to "Download Résumé" (both 182x49, equal size); removed Résumé row from About.
+- Content edits: Education degrees, hero stat labels, footer text (current: "© 2026 Jacqueline. All rights reserved." + "Jacqueline Magawa — CS in Cybersecurity, Class of 2027"). Removed Aug 2021 FAA Student Pilot Flight Log entry.

@@ -329,6 +329,9 @@ h4 {
 .nav-toggle.open span:nth-child(3) {
         transform: translateY(-7px) rotate(-45deg);
 }
+.nav-toggle.open span {
+        background: var(--cream);
+}
 
 /* ============ HERO ============ */
 .hero {
@@ -2313,5 +2316,24 @@ a.c-card:hover {
         }
         .portrait-label {
                 left: -26px;
+        }
+        .footer-inner {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 16px;
+        }
+        .footer-brand {
+                align-items: center;
+                text-align: center;
+        }
+        .footer-brand > span {
+                white-space: normal;
+        }
+        .footer-socials {
+                justify-content: center;
+        }
+        .footer-tagline {
+                text-align: center;
         }
 }
