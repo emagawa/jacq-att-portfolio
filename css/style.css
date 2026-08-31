@@ -422,13 +422,13 @@ h4 {
 
 .hero-stats {
         display: flex;
-        gap: 42px;
-        flex-wrap: wrap;
+        gap: 26px;
+        flex-wrap: nowrap;
 }
 
 .stat b {
         font-family: var(--font-display);
-        font-size: 2.2rem;
+        font-size: 1.85rem;
         font-weight: 700;
         color: var(--ink);
         display: block;
@@ -437,13 +437,13 @@ h4 {
 
 .stat span {
         font-family: var(--font-mono);
-        font-size: 0.68rem;
-        letter-spacing: 0.1em;
+        font-size: 0.64rem;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
         color: var(--muted);
         margin-top: 8px;
         display: block;
-        max-width: 130px;
+        max-width: 120px;
 }
 
 /* Hero portrait — arched, dashed frame */
@@ -1760,7 +1760,8 @@ h4 {
                 gap: 14px;
         }
         .hero-stats {
-                gap: 26px;
+                gap: 24px 26px;
+                flex-wrap: wrap;
         }
         .scroll-cue {
                 display: none;
