@@ -1575,9 +1575,9 @@ h4 {
         gap: 12px;
 }
 
-.c-open {
+.contact-cards .c-open {
         flex: 1;
-        padding-bottom: 34px;
+        padding-bottom: 35px;
 }
 
 .c-card {
@@ -1775,12 +1775,22 @@ a.c-card:hover {
 
 .footer-brand {
         display: flex;
-        align-items: center;
-        gap: 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
         font-family: var(--font-mono);
         font-size: 0.72rem;
         letter-spacing: 0.08em;
         color: rgba(243, 241, 234, 0.6);
+}
+
+.footer-brand > span {
+        white-space: nowrap;
+}
+
+.footer-tagline {
+        color: rgba(243, 241, 234, 0.42);
+        font-size: 0.68rem;
 }
 
 .footer-brand img {
