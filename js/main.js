@@ -239,7 +239,7 @@ const galleryData = [
         { file: "g47.jpg", title: "Young Eagles Certificate", desc: "EAA Young Eagles — certificate award" },
         { file: "g48.jpg", title: "Experimental class", desc: "Riding along in an experimental-category aircraft." },
         { file: "g53.jpg", title: "With her instructor", desc: "A moment with the team at Brookhaven Aviation." },
-        { file: "g58.jpg", title: "Young Eagles Certificate", desc: "EAA Young Eagles \u2014 certificate & flight logbook awarded." },
+        { file: "g58.jpg", title: "Young Eagles Certificate", desc: "EAA Young Eagles \u2014 certificate & flight logbook award." },
         { file: "g60.jpg", title: "Cleared for taxi", desc: "Celebrating on the ramp after a lesson." },
         { file: "g61.jpg", title: "Cockpit door", desc: "Sharing the moment with an instructor." },
         { file: "g63.jpg", title: "Hands-on training", desc: "Working the yoke with an instructor alongside." },
