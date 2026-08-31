@@ -8,11 +8,19 @@ document.getElementById("year").textContent = new Date().getFullYear();
 const siteNav = document.getElementById("siteNav");
 const navToggle = document.getElementById("navToggle");
 const navLinks = document.getElementById("navLinks");
+const backToTop = document.getElementById("backToTop");
+
+if (backToTop)
+        backToTop.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+        });
 
 window.addEventListener(
         "scroll",
         () => {
                 siteNav.classList.toggle("scrolled", window.scrollY > 40);
+                if (backToTop)
+                        backToTop.classList.toggle("show", window.scrollY > 400);
         },
         { passive: true },
 );
