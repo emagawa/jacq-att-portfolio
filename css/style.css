@@ -422,8 +422,12 @@ h4 {
 
 .hero-stats {
         display: flex;
-        gap: 26px;
-        flex-wrap: nowrap;
+        gap: 24px 34px;
+        flex-wrap: wrap;
+}
+
+.stat {
+        text-align: center;
 }
 
 .stat b {
@@ -443,7 +447,7 @@ h4 {
         color: var(--muted);
         margin-top: 8px;
         display: block;
-        max-width: 120px;
+        white-space: nowrap;
 }
 
 /* Hero portrait — arched, dashed frame */
