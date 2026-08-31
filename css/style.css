@@ -661,6 +661,11 @@ h4 {
         text-align: right;
 }
 
+.sec-head--split .sec-note {
+        grid-column: 2 / -1;
+        max-width: none;
+}
+
 .sec-head .sec-note {
         grid-column: 2;
         max-width: 460px;
