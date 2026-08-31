@@ -1791,10 +1791,10 @@ a.c-card:hover {
 
 .footer-tagline {
         font-family: var(--font-mono);
-        color: rgba(243, 241, 234, 0.6);
-        font-weight: 400;
-        font-size: 15px;
-        letter-spacing: 0.08em;
+        color: rgb(174, 184, 192);
+        font-weight: 500;
+        font-size: 14px;
+        letter-spacing: normal;
 }
 
 /* ============ BACK TO TOP ============ */
