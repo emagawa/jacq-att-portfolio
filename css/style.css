@@ -942,6 +942,120 @@ h4 {
         color: var(--rust-deep);
 }
 
+/* ============ EDUCATION & CREDENTIALS ============ */
+.edu-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 56px;
+        align-items: start;
+}
+
+.edu-left {
+        position: relative;
+        border-top: 1px solid var(--line-strong);
+        padding-top: 44px;
+}
+
+.edu-left::before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        left: 42%;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--rust);
+}
+
+.edu-cap {
+        display: block;
+        color: var(--rust);
+        margin-bottom: 20px;
+}
+
+.edu-cap svg {
+        width: 30px;
+        height: 30px;
+}
+
+.edu-block {
+        margin-bottom: 48px;
+}
+
+.edu-block:last-child {
+        margin-bottom: 0;
+}
+
+.edu-block h3 {
+        font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+        font-weight: 400;
+        line-height: 1.15;
+}
+
+.edu-sub {
+        font-style: italic;
+        color: var(--ink-soft);
+        margin: 12px 0 18px;
+        font-size: 0.98rem;
+}
+
+.cert-card {
+        background: var(--cream-2);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 22px 24px;
+        margin-bottom: 18px;
+        transition:
+                transform 0.35s var(--ease),
+                box-shadow 0.35s var(--ease);
+}
+
+.cert-card:last-child {
+        margin-bottom: 0;
+}
+
+.cert-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 16px 38px rgba(19, 41, 59, 0.08);
+}
+
+.cert-head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--font-mono);
+        font-size: 0.66rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--teal);
+        margin-bottom: 12px;
+}
+
+.cert-head svg {
+        width: 16px;
+        height: 16px;
+        color: var(--teal);
+}
+
+.cert-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--rust);
+}
+
+.cert-card h4 {
+        font-size: 1.12rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+}
+
+.cert-card p {
+        font-size: 0.92rem;
+        color: var(--ink-soft);
+        line-height: 1.55;
+}
+
 /* ============ CHECKLIST ============ */
 .checklist-subhead {
         font-family: var(--font-mono);
@@ -1810,7 +1924,8 @@ h4 {
                 order: -1;
         }
         .about-grid,
-        .contact-grid {
+        .contact-grid,
+        .edu-grid {
                 grid-template-columns: 1fr;
                 gap: 40px;
         }
