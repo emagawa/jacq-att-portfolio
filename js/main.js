@@ -120,7 +120,7 @@ const films = [
                 slug: "first-flight-brookhaven-2015",
                 title: "First Flight — Brookhaven Airport",
                 meta: "16 May 2015 · Shirley, NY",
-                desc: "Her very first flight, front seat, with a certified flight instructor.",
+                desc: "My very first flight, front seat, with a certified flight instructor.",
         },
         {
                 slug: "first-taxi-brookhaven-2015",
