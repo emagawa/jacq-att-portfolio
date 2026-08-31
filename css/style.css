@@ -664,8 +664,8 @@ h4 {
 /* ============ ABOUT ============ */
 .about-grid {
         display: grid;
-        grid-template-columns: 1.3fr 0.7fr;
-        gap: 56px;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 64px;
         align-items: start;
 }
 
@@ -677,6 +677,84 @@ h4 {
 .about-copy p.lead {
         font-size: 1.15rem;
         color: var(--ink);
+}
+
+.about-copy a {
+        color: var(--rust);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        text-decoration-thickness: 1px;
+        transition: color 0.3s var(--ease);
+}
+
+.about-copy a:hover {
+        color: var(--rust-deep);
+}
+
+.about-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 26px;
+        margin-top: 46px;
+}
+
+.about-stat {
+        border-top: 1px solid var(--line-strong);
+        padding-top: 16px;
+}
+
+.about-stat b {
+        font-family: var(--font-display);
+        font-size: 2.6rem;
+        font-weight: 400;
+        line-height: 1;
+        color: var(--rust);
+        display: block;
+}
+
+.about-stat span {
+        display: block;
+        margin-top: 14px;
+        font-size: 0.86rem;
+        color: var(--ink-soft);
+        line-height: 1.45;
+}
+
+.about-info {
+        border-top: 1px solid var(--line);
+}
+
+.about-info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 18px;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--line);
+}
+
+.about-info-row .k {
+        color: var(--ink);
+        font-size: 0.98rem;
+}
+
+.about-info-row .v {
+        font-family: var(--font-mono);
+        font-size: 0.76rem;
+        letter-spacing: 0.04em;
+        color: var(--ink-soft);
+        text-align: right;
+}
+
+.about-info-row .v a {
+        color: var(--rust);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        transition: color 0.3s var(--ease);
+}
+
+.about-info-row .v a:hover {
+        color: var(--rust-deep);
 }
 
 .info-strip {
@@ -1783,6 +1861,10 @@ h4 {
         .hero-stats {
                 gap: 24px 26px;
                 flex-wrap: wrap;
+        }
+        .about-stats {
+                grid-template-columns: 1fr;
+                gap: 18px;
         }
         .scroll-cue {
                 display: none;

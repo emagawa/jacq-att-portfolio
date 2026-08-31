@@ -316,7 +316,10 @@ function closeResume() {
 }
 
 document.querySelectorAll("[data-resume-open]").forEach((btn) => {
-        btn.addEventListener("click", openResume);
+        btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                openResume();
+        });
 });
 document.getElementById("resumeClose").addEventListener("click", closeResume);
 resumeModal.addEventListener("click", (e) => {
