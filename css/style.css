@@ -1694,8 +1694,10 @@ a.c-card:hover {
 }
 
 .c-open-actions .btn {
-        padding-top: 13px;
-        padding-bottom: 13px;
+        flex: 1 1 0;
+        min-width: 0;
+        white-space: nowrap;
+        padding: 13px 16px;
 }
 
 .c-open .btn-ghost {
