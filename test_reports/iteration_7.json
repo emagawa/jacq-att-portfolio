@@ -1,0 +1,25 @@
+{
+  "summary": "Frontend-only regression tests for responsive nav breakpoint fix (<=1024px hamburger, >1024px inline). All specified viewports pass: 390x844, 768x1024, 1024x1366 show hamburger + no horizontal overflow + all 9 links reachable via slide-in panel (cream on dark). 1100x900 and 1440x900 show inline nav with all 9 links fitting within viewport (max right 1020<=1100 and 1360<=1440). Menu open/close behavior verified at 768: clicking a link closes panel and navigates.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Reveal-on-scroll (390x844)", "issues": ["After scrolling to bottom, 4 of 62 .reveal elements did NOT receive the 'in' class (still hidden). Minor — most content is revealed. May be elements just outside the observed threshold at bottom of page."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Minor: 4/62 .reveal elements never receive the 'in' class even after full-page scroll on 390x844; verify the on-load fallback in js/main.js covers items whose top is below the viewport but with rootMargin negative, or bump rootMargin so bottom items trigger reliably.",
+    "The .nav-toggle button's computed color is rgb(0,0,0) even when the slide-in panel is open. Visually the close-X appears light because the spans use their own background-color, so it works — but consider setting .nav-toggle.open color to var(--cream) for consistency."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "test_credentials": "None (static site)",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Responsive nav verified at 390/768/1024/1100/1440. Breakpoint <=1024 => hamburger + fixed off-screen panel (translateX(340px) at 768/1024, 304px at 390); >1024 => inline nav fits. Menu opens (transform:none), all 9 nav-link-* testids present with cream color rgb(243,241,234) on dark panel. Clicking nav-link-about closes menu and sets hash=#about. document.documentElement.scrollWidth never exceeds innerWidth on any tested width. Only minor: 4/62 .reveal elements don't get 'in' at very bottom on mobile.",
+  "rca of the issue": "Original bug (fixed by main agent before this iteration): breakpoint was 720px; 721-1024px range hid hamburger while inline nav overflowed. Fix moved mobile-nav CSS block to @media (max-width:1024px). Verified working."
+}

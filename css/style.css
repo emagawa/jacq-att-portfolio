@@ -2215,6 +2215,34 @@ a.c-card:hover {
         .container {
                 padding-inline: 40px;
         }
+        .nav-links {
+                position: fixed;
+                inset: 0 0 0 auto;
+                width: min(78vw, 340px);
+                background: var(--ink);
+                flex-direction: column;
+                justify-content: center;
+                padding: 40px;
+                gap: 18px;
+                transform: translateX(100%);
+                transition: transform 0.4s var(--ease);
+                z-index: 90;
+        }
+        .nav-links.open {
+                transform: none;
+        }
+        .nav-links .nav-link {
+                color: var(--cream);
+                font-size: 1rem;
+        }
+        .nav-cta {
+                display: none;
+        }
+        .nav-toggle {
+                display: flex;
+                margin-left: auto;
+                z-index: 95;
+        }
         .hero .container {
                 grid-template-columns: 1fr;
                 gap: 48px;
