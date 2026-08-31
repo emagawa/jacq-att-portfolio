@@ -1655,16 +1655,20 @@ a.c-card:hover {
         border-radius: 50%;
         display: grid;
         place-items: center;
-        color: var(--cream);
         border: 1px solid rgba(243, 241, 234, 0.16);
         transition:
                 background-color 0.3s var(--ease),
+                color 0.3s var(--ease),
                 transform 0.3s var(--ease);
 }
 
-.c-socials a:nth-child(1):hover { background: #0a66c2; border-color: #0a66c2; }
-.c-socials a:nth-child(2):hover { background: #000; border-color: #000; }
-.c-socials a:nth-child(3):hover { background: #25d366; border-color: #25d366; }
+.c-socials a:nth-child(1) { color: #4a9fe0; }
+.c-socials a:nth-child(2) { color: #f3f1ea; }
+.c-socials a:nth-child(3) { color: #25d366; }
+
+.c-socials a:nth-child(1):hover { background: #0a66c2; border-color: #0a66c2; color: #fff; }
+.c-socials a:nth-child(2):hover { background: #000; border-color: #000; color: #fff; }
+.c-socials a:nth-child(3):hover { background: #25d366; border-color: #25d366; color: #fff; }
 .c-socials a:hover { transform: translateY(-2px); }
 
 .c-socials svg {
