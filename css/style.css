@@ -1535,13 +1535,18 @@ h4 {
 }
 
 /* ============ CONTACT ============ */
+.contact-pink {
+        background: #f6dae0;
+}
+
 .contact-statement {
-        font-size: clamp(1.8rem, 4vw, 3rem);
+        font-size: clamp(2.3rem, 5vw, 3.7rem);
         font-weight: 300;
         letter-spacing: -0.02em;
-        line-height: 1.08;
-        max-width: 800px;
-        margin-bottom: 52px;
+        line-height: 1.06;
+        max-width: 860px;
+        margin-bottom: 56px;
+        color: var(--ink);
 }
 
 .contact-statement .rust {
@@ -1553,13 +1558,18 @@ h4 {
         display: grid;
         grid-template-columns: 0.85fr 1.15fr;
         gap: 28px;
-        align-items: start;
+        align-items: stretch;
 }
 
 .contact-cards {
         display: flex;
         flex-direction: column;
         gap: 18px;
+        height: 100%;
+}
+
+.c-open {
+        flex: 1;
 }
 
 .c-card {
@@ -1656,6 +1666,18 @@ a.c-card:hover {
         color: rgba(243, 241, 234, 0.72);
         font-size: 0.94rem;
         line-height: 1.55;
+}
+
+.c-open .btn-ghost {
+        color: var(--cream);
+        border-color: rgba(243, 241, 234, 0.28);
+        margin-top: auto;
+}
+
+.c-open .btn-ghost:hover {
+        background: var(--cream);
+        color: var(--ink);
+        border-color: var(--cream);
 }
 
 /* Contact form — dark card */
