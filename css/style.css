@@ -1588,6 +1588,7 @@ h4 {
         display: flex;
         align-items: center;
         gap: 18px;
+        text-align: left;
         transition:
                 transform 0.35s var(--ease),
                 border-color 0.35s var(--ease);
