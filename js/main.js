@@ -236,7 +236,7 @@ const galleryData = [
         { file: "g39.jpg", title: "High above", desc: "Cruising altitude on a clear-sky training day." },
         { file: "g42.jpg", title: "Eyes on the horizon", desc: "In the cockpit, mid-flight." },
         { file: "g44.jpg", title: "Working the checklist", desc: "Hands-on with the avionics." },
-        { file: "g47.jpg", title: "Panel scan", desc: "Reading instruments during climb-out." },
+        { file: "g47.jpg", title: "Young Eagles Certificate", desc: "EAA Young Eagles — Certificate awarded." },
         { file: "g48.jpg", title: "Experimental class", desc: "Riding along in an experimental-category aircraft." },
         { file: "g53.jpg", title: "With her instructor", desc: "A moment with the team at Brookhaven Aviation." },
         { file: "g58.jpg", title: "Young Eagles Certificate", desc: "EAA Young Eagles \u2014 the flight that started it all." },
