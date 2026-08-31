@@ -931,6 +931,17 @@ h4 {
         line-height: 1.6;
 }
 
+.tl-note a {
+        color: var(--rust);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        transition: color 0.3s var(--ease);
+}
+
+.tl-note a:hover {
+        color: var(--rust-deep);
+}
+
 /* ============ CHECKLIST ============ */
 .checklist-subhead {
         font-family: var(--font-mono);
