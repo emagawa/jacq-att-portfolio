@@ -421,9 +421,13 @@ h4 {
 }
 
 .hero-stats {
+        grid-column: 1 / -1;
         display: flex;
-        gap: 24px 34px;
+        gap: 22px 52px;
         flex-wrap: wrap;
+        margin-top: 34px;
+        padding-top: 30px;
+        border-top: 1px solid var(--line);
 }
 
 .stat {
