@@ -1632,6 +1632,7 @@ a.c-card:hover {
 .c-label {
         font-family: var(--font-mono);
         font-size: 0.82rem;
+        font-weight: 600;
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: var(--gold);
@@ -1700,6 +1701,7 @@ a.c-card:hover {
         flex: 1 1 0;
         min-width: 0;
         white-space: nowrap;
+        font-weight: 600;
         padding: 13px 16px;
 }
 
@@ -1738,6 +1740,7 @@ a.c-card:hover {
 .form-card .field label {
         color: var(--gold);
         font-size: 0.82rem;
+        font-weight: 600;
         letter-spacing: 0.12em;
         margin-bottom: 9px;
 }
