@@ -1790,7 +1790,8 @@ a.c-card:hover {
 }
 
 .footer-tagline {
-        color: rgba(243, 241, 234, 0.42);
+        color: rgba(243, 241, 234, 0.6);
+        font-weight: 400;
         font-size: 15px;
 }
 
