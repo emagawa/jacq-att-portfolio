@@ -1558,13 +1558,14 @@ h4 {
         display: grid;
         grid-template-columns: 0.85fr 1.15fr;
         gap: 28px;
-        align-items: start;
+        align-items: stretch;
 }
 
 .contact-cards {
         display: flex;
         flex-direction: column;
         gap: 14px;
+        height: 100%;
 }
 
 .c-connect,
@@ -1575,6 +1576,7 @@ h4 {
 }
 
 .c-open {
+        flex: 1;
         padding-bottom: 34px;
 }
 
@@ -1718,6 +1720,10 @@ a.c-card:hover {
         font-size: 0.82rem;
         letter-spacing: 0.12em;
         margin-bottom: 9px;
+}
+
+.form-card .field textarea {
+        resize: none;
 }
 
 .form-card .field input,
