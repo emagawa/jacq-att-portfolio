@@ -1686,10 +1686,16 @@ a.c-card:hover {
         line-height: 1.55;
 }
 
+.c-open-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: auto;
+}
+
 .c-open .btn-ghost {
         color: var(--cream);
         border-color: rgba(243, 241, 234, 0.28);
-        margin-top: auto;
 }
 
 .c-open .btn-ghost:hover {
