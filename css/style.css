@@ -1693,6 +1693,11 @@ a.c-card:hover {
         margin-top: auto;
 }
 
+.c-open-actions .btn {
+        padding-top: 13px;
+        padding-bottom: 13px;
+}
+
 .c-open .btn-ghost {
         color: var(--cream);
         border-color: rgba(243, 241, 234, 0.28);
