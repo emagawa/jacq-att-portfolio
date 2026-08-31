@@ -379,6 +379,17 @@ h4 {
         margin-bottom: 34px;
 }
 
+.lede-lead {
+        display: block;
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 1.35rem;
+        line-height: 1.2;
+        color: var(--ink);
+        margin-bottom: 12px;
+        letter-spacing: -0.01em;
+}
+
 .hero-actions {
         display: flex;
         gap: 14px;
