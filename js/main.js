@@ -230,7 +230,7 @@ const galleryData = [
         { file: "g04.jpg", title: "Instrument briefing", desc: "Walking through the panel before a training flight." },
         { file: "g17.jpg", title: "Cabin check", desc: "Settling in before a training leg out of Republic Airport." },
         { file: "g19.jpg", title: "Downwind", desc: "Looking out over the field on approach." },
-        { file: "g20.jpg", title: "Hands on the yoke", desc: "Working the panel during a lesson." },
+        { file: "g20.jpg", title: "With my instructor Mr. James", desc: "At Farmingdale Airport." },
         { file: "g34.jpg", title: "Ramp crew", desc: "With instructors after a cross-country flight." },
         { file: "g36.jpg", title: "On the ramp", desc: "Preflight at Republic Airport, Farmingdale." },
         { file: "g39.jpg", title: "High above", desc: "Cruising altitude on a clear-sky training day." },
