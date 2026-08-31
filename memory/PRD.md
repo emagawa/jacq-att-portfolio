@@ -48,6 +48,11 @@ Finish and polish the existing static portfolio for Jacqueline Magawa (aviation 
 - Fixed entrance animation to animate transform only (opacity always 1) so hero content is never left invisible; deep-navy name now renders correctly.
 - PENDING: user will deploy and paste the Emergent deploy URL; then update og:url / og:image / twitter:image / canonical in index.html to that domain.
 
+## Update (2026-06) — contact cards + favicons
+- Left-justified the 3rd ("Connect with me") and 4th ("Open to opportunities") contact cards: added `.c-connect, .c-open { flex-direction: column; align-items: flex-start; text-align: left; }` in style.css so their content stacks flush-left. (verified via computed styles + screenshot)
+- Regenerated favicon.png (48), favicon-32.png (32) and apple-touch-icon.png (180) from the circular portrait logo (assets/img/logo-fa.png) to match site branding.
+- Still pending (P2): update og:url / og:image / twitter:image / canonical to production domain after deploy (user has no final domain yet).
+
 ## Update (2026-06) — sections split
 - Split the combined timeline into two sections: Flight Log (02, 7 aviation entries) and a new Education (03, 8 study/work/projects/now entries).
 - Renumbered following sections: Checklist 04, Projects 05, Training Films 06, Gallery 07, Contact 08; alternated section backgrounds; added Education nav link.
