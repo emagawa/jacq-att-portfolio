@@ -662,8 +662,8 @@ h4 {
 }
 
 .sec-head--split .sec-note {
-        grid-column: 2 / -1;
-        max-width: none;
+        grid-column: 2;
+        max-width: 660px;
 }
 
 .sec-head .sec-note {
