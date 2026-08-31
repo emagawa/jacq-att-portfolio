@@ -1790,9 +1790,11 @@ a.c-card:hover {
 }
 
 .footer-tagline {
+        font-family: var(--font-mono);
         color: rgba(243, 241, 234, 0.6);
         font-weight: 400;
         font-size: 15px;
+        letter-spacing: 0.08em;
 }
 
 /* ============ BACK TO TOP ============ */
