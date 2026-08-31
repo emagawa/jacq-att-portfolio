@@ -245,7 +245,7 @@ const galleryData = [
         { file: "g63.jpg", title: "Hands-on training", desc: "Working the yoke with an instructor alongside." },
         { file: "g69.jpg", title: "With Instructor Alfred James", desc: "Preflight at Republic Airport, Farmingdale." },
         { file: "g70.jpg", title: "At the controls", desc: "A quick look back before heading out." },
-        { file: "g71.jpg", title: "Young Eagles day", desc: "With her flight instructor after the certificate ceremony." },
+        { file: "g71.jpg", title: "Young Eagles day", desc: "With my flight instructor after the certificate ceremony." },
 ];
 const galleryGrid = document.getElementById("galleryGrid");
 galleryData.forEach((g, i) => {
