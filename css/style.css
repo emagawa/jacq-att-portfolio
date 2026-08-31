@@ -1624,8 +1624,8 @@ a.c-card:hover {
 
 .c-label {
         font-family: var(--font-mono);
-        font-size: 0.74rem;
-        letter-spacing: 0.16em;
+        font-size: 0.82rem;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
         color: var(--gold);
 }
