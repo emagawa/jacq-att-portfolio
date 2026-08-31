@@ -385,6 +385,41 @@ h4 {
         margin-bottom: 46px;
 }
 
+.hero-contact {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px 14px;
+        margin-bottom: 30px;
+}
+
+.hero-contact .hc-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        letter-spacing: 0.03em;
+        color: var(--ink-soft);
+        transition: color 0.3s var(--ease);
+}
+
+.hero-contact a.hc-item:hover {
+        color: var(--rust);
+}
+
+.hero-contact .hc-item svg {
+        width: 15px;
+        height: 15px;
+        color: var(--teal);
+        flex-shrink: 0;
+}
+
+.hero-contact .hc-sep {
+        color: var(--line-strong);
+        font-size: 0.8rem;
+}
+
 .hero-stats {
         display: flex;
         gap: 42px;
