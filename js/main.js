@@ -210,7 +210,6 @@ films.forEach((f, i) => {
 const galleryData = [
         { file: "g00-redacted.jpg", title: "FAA Student Pilot Certificate", desc: "Issued 26 Aug 2021 \u2014 personal details redacted for privacy." },
         { file: "g04.jpg", title: "Instrument briefing", desc: "Walking through the panel before a training flight." },
-        { file: "g16.jpg", title: "Martha's Vineyard Airport", desc: "General Aviation ramp, mid cross-country trip." },
         { file: "g17.jpg", title: "Cabin check", desc: "Settling in before a training leg out of Republic Airport." },
         { file: "g19.jpg", title: "Downwind", desc: "Looking out over the field on approach." },
         { file: "g20.jpg", title: "Hands on the yoke", desc: "Working the panel during a lesson." },
