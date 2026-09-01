@@ -1013,7 +1013,7 @@ h4 {
         line-height: 1;
         vertical-align: -0.12em;
         margin: 0 3px;
-        color: var(--rust);
+        color: var(--ink);
 }
 
 .cert-card {
