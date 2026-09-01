@@ -1007,13 +1007,12 @@ h4 {
 }
 
 .edu-arrow {
-        font-style: normal;
-        font-size: 1.5em;
-        font-weight: 600;
-        line-height: 1;
-        vertical-align: -0.12em;
-        margin: 0 3px;
-        color: var(--ink);
+        display: inline-block;
+        width: 1.7em;
+        height: 0;
+        border-top: 1px solid var(--ink);
+        vertical-align: middle;
+        margin: 0 5px;
 }
 
 .cert-card {
