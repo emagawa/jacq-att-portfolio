@@ -160,7 +160,7 @@ const films = [
         },
         {
                 slug: "midair-cruising-2019",
-                title: "Mid-Air Cruising",
+                title: "Mid-Air Cruising & Control",
                 meta: "Republic Airport · Farmingdale, NY",
                 desc: "Steady cruising and control work aloft.",
         },
