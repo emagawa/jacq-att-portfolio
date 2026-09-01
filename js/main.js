@@ -166,9 +166,9 @@ const films = [
         },
         {
                 slug: "cross-country-training-2019",
-                title: "Alfred James Takes Flight Over The Hudson River",
-                meta: "Hudson River, NY",
-                desc: "Flying over the Hudson River with Instructor Alfred James.",
+                title: "Cross-Country: Training",
+                meta: "with Instructor Alfred James",
+                desc: "A long cross-country navigation flight — tracking waypoints and working the panel en route.",
         },
 ];
 
