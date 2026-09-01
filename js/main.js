@@ -441,16 +441,13 @@ contactForm.addEventListener("submit", async (e) => {
 });
 
 
-/* ---------- Custom cursor: blue dot + trailing ring (lerp) ---------- */
+/* ---------- Custom cursor: smooth blue dot ---------- */
 const cursorDot = document.getElementById("cursorDot");
-const cursorRing = document.getElementById("cursorRing");
-if (cursorDot && cursorRing && window.matchMedia("(pointer: fine)").matches) {
+if (cursorDot && window.matchMedia("(pointer: fine)").matches) {
         let mouseX = window.innerWidth / 2;
         let mouseY = window.innerHeight / 2;
         let dotX = mouseX,
                 dotY = mouseY;
-        let ringX = mouseX,
-                ringY = mouseY;
         let visible = false;
 
         window.addEventListener(
@@ -461,7 +458,6 @@ if (cursorDot && cursorRing && window.matchMedia("(pointer: fine)").matches) {
                         if (!visible) {
                                 visible = true;
                                 cursorDot.classList.add("is-visible");
-                                cursorRing.classList.add("is-visible");
                         }
                 },
                 { passive: true },
@@ -469,18 +465,13 @@ if (cursorDot && cursorRing && window.matchMedia("(pointer: fine)").matches) {
         document.addEventListener("mouseleave", () => {
                 visible = false;
                 cursorDot.classList.remove("is-visible");
-                cursorRing.classList.remove("is-visible");
         });
 
         function renderCursor() {
-                dotX += (mouseX - dotX) * 0.55;
-                dotY += (mouseY - dotY) * 0.55;
-                ringX += (mouseX - ringX) * 0.18;
-                ringY += (mouseY - ringY) * 0.18;
+                dotX += (mouseX - dotX) * 0.2;
+                dotY += (mouseY - dotY) * 0.2;
                 cursorDot.style.left = dotX + "px";
                 cursorDot.style.top = dotY + "px";
-                cursorRing.style.left = ringX + "px";
-                cursorRing.style.top = ringY + "px";
                 requestAnimationFrame(renderCursor);
         }
         requestAnimationFrame(renderCursor);
@@ -488,13 +479,11 @@ if (cursorDot && cursorRing && window.matchMedia("(pointer: fine)").matches) {
         const hoverSel =
                 "a, button, .film-media, [role='button'], input, textarea, select, label, .c-socials a";
         document.querySelectorAll(hoverSel).forEach((el) => {
-                el.addEventListener("mouseenter", () => {
-                        cursorRing.classList.add("is-hover");
-                        cursorDot.classList.add("is-hover");
-                });
-                el.addEventListener("mouseleave", () => {
-                        cursorRing.classList.remove("is-hover");
-                        cursorDot.classList.remove("is-hover");
-                });
+                el.addEventListener("mouseenter", () =>
+                        cursorDot.classList.add("is-hover"),
+                );
+                el.addEventListener("mouseleave", () =>
+                        cursorDot.classList.remove("is-hover"),
+                );
         });
 }
