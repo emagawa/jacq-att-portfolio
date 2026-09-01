@@ -439,3 +439,34 @@ contactForm.addEventListener("submit", async (e) => {
                 cfSubmit.textContent = original;
         }
 });
+
+
+/* ---------- Custom navy cursor dot ---------- */
+const cursorDot = document.getElementById("cursorDot");
+if (cursorDot && window.matchMedia("(pointer: fine)").matches) {
+        window.addEventListener(
+                "mousemove",
+                (e) => {
+                        cursorDot.style.left = e.clientX + "px";
+                        cursorDot.style.top = e.clientY + "px";
+                        cursorDot.classList.add("is-visible");
+                },
+                { passive: true },
+        );
+        document.addEventListener("mouseleave", () =>
+                cursorDot.classList.remove("is-visible"),
+        );
+        document.addEventListener("mouseenter", () =>
+                cursorDot.classList.add("is-visible"),
+        );
+        const hoverSel =
+                "a, button, .film-media, [role='button'], input, textarea, select, label, .c-socials a";
+        document.querySelectorAll(hoverSel).forEach((el) => {
+                el.addEventListener("mouseenter", () =>
+                        cursorDot.classList.add("is-hover"),
+                );
+                el.addEventListener("mouseleave", () =>
+                        cursorDot.classList.remove("is-hover"),
+                );
+        });
+}
