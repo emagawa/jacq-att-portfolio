@@ -159,14 +159,14 @@ const films = [
                 desc: "Instrument work and cruising, mid-flight.",
         },
         {
-                slug: "midair-cruising-2019",
-                title: "Mid-Air Cruising & Control",
+                slug: "takeoff-farmingdale-2019",
+                title: "Taking off at Farmingdale Airport",
                 meta: "Republic Airport · Farmingdale, NY",
-                desc: "Steady cruising and control work aloft.",
+                desc: "Lineup, takeoff roll, and liftoff out of Farmingdale.",
         },
         {
                 slug: "cross-country-training-2019",
-                title: "Cross-Country: Training",
+                title: "Cross-Country: Mid-Air Training",
                 meta: "with Instructor Alfred James",
                 desc: "A long cross-country navigation flight — tracking waypoints and working the panel en route.",
         },
