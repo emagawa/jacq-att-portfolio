@@ -468,16 +468,15 @@ if (cursorDot && window.matchMedia("(pointer: fine)").matches) {
         });
 
         function renderCursor() {
-                dotX += (mouseX - dotX) * 0.2;
-                dotY += (mouseY - dotY) * 0.2;
+                dotX += (mouseX - dotX) * 0.14;
+                dotY += (mouseY - dotY) * 0.14;
                 cursorDot.style.left = dotX + "px";
                 cursorDot.style.top = dotY + "px";
                 requestAnimationFrame(renderCursor);
         }
         requestAnimationFrame(renderCursor);
 
-        const hoverSel =
-                "a, button, .film-media, [role='button'], input, textarea, select, label, .c-socials a";
+        const hoverSel = "a, button, [role='button']";
         document.querySelectorAll(hoverSel).forEach((el) => {
                 el.addEventListener("mouseenter", () =>
                         cursorDot.classList.add("is-hover"),

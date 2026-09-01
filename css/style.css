@@ -1864,8 +1864,7 @@ a.c-card:hover {
 }
 
 .cursor-dot.is-hover {
-        width: 16px;
-        height: 16px;
+        opacity: 0;
 }
 
 @media (hover: none), (pointer: coarse) {
