@@ -165,11 +165,10 @@ const films = [
                 desc: "Steady cruising and control work aloft.",
         },
         {
-                slug: "alfred-james-hudson",
+                slug: "cross-country-training-2019",
                 title: "Alfred James Takes Flight Over The Hudson River",
                 meta: "Hudson River, NY",
                 desc: "Flying over the Hudson River with Instructor Alfred James.",
-                youtube: "92ZZyHlfW4Q",
         },
 ];
 
