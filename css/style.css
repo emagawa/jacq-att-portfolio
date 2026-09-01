@@ -504,7 +504,9 @@ h4 {
         height: 100%;
         object-fit: cover;
         border-radius: 16px;
-        box-shadow: 0 24px 60px rgba(19, 41, 59, 0.18);
+        box-shadow:
+                0 18px 40px rgba(19, 41, 59, 0.28),
+                0 40px 80px rgba(19, 41, 59, 0.22);
         filter: saturate(1.02);
 }
 
