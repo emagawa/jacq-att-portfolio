@@ -1839,38 +1839,63 @@ a.c-card:hover {
         letter-spacing: normal;
 }
 
-/* ============ CUSTOM CURSOR DOT ============ */
-.cursor-dot {
+/* ============ CUSTOM CURSOR (dot + trailing ring) ============ */
+.cursor-dot,
+.cursor-ring {
         position: fixed;
         top: 0;
         left: 0;
-        width: 9px;
-        height: 9px;
-        background: var(--ink);
         border-radius: 50%;
         transform: translate(-50%, -50%);
-        z-index: 9999;
         pointer-events: none;
         opacity: 0;
+        will-change: transform;
+}
+
+.cursor-dot {
+        width: 13px;
+        height: 13px;
+        background: #1f6fe6;
+        z-index: 100000;
         transition:
                 opacity 0.25s ease,
                 width 0.2s ease,
-                height 0.2s ease,
-                background 0.2s ease;
+                height 0.2s ease;
 }
 
-.cursor-dot.is-visible {
+.cursor-ring {
+        width: 38px;
+        height: 38px;
+        border: 1.5px solid rgba(31, 111, 230, 0.7);
+        z-index: 99999;
+        transition:
+                opacity 0.25s ease,
+                width 0.25s ease,
+                height 0.25s ease,
+                background 0.25s ease,
+                border-color 0.25s ease;
+}
+
+.cursor-dot.is-visible,
+.cursor-ring.is-visible {
         opacity: 1;
 }
 
+.cursor-ring.is-hover {
+        width: 56px;
+        height: 56px;
+        background: rgba(31, 111, 230, 0.12);
+        border-color: rgba(31, 111, 230, 0.9);
+}
+
 .cursor-dot.is-hover {
-        width: 30px;
-        height: 30px;
-        background: rgba(19, 41, 59, 0.22);
+        width: 8px;
+        height: 8px;
 }
 
 @media (hover: none), (pointer: coarse) {
-        .cursor-dot {
+        .cursor-dot,
+        .cursor-ring {
                 display: none;
         }
 }
