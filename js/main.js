@@ -152,6 +152,25 @@ const films = [
                 meta: "31 Aug 2019 · with Instructor Alfred James",
                 desc: "A cross-country training flight out to Martha's Vineyard.",
         },
+        {
+                slug: "midair-training-cruising-2019",
+                title: "Mid-Air Training & Cruising",
+                meta: "Republic Airport · Farmingdale, NY",
+                desc: "Instrument work and cruising, mid-flight.",
+        },
+        {
+                slug: "midair-cruising-2019",
+                title: "Mid-Air Cruising",
+                meta: "Republic Airport · Farmingdale, NY",
+                desc: "Steady cruising and control work aloft.",
+        },
+        {
+                slug: "alfred-james-hudson",
+                title: "Alfred James Takes Flight Over The Hudson River",
+                meta: "Hudson River, NY",
+                desc: "Flying over the Hudson River with Instructor Alfred James.",
+                youtube: "92ZZyHlfW4Q",
+        },
 ];
 
 const filmsGrid = document.getElementById("filmsGrid");
@@ -159,13 +178,19 @@ films.forEach((f, i) => {
         const card = document.createElement("div");
         card.className = "film-card reveal";
         card.setAttribute("data-testid", `film-card-${i}`);
+        const poster = f.youtube
+                ? `https://i.ytimg.com/vi/${f.youtube}/hqdefault.jpg`
+                : `assets/video/posters/${f.slug}.jpg`;
+        const badge = f.youtube
+                ? `<span class="film-badge">YouTube · click to play</span>`
+                : `<span class="film-badge">Muted preview · click for sound</span>`;
         card.innerHTML = `
     <div class="film-media" data-slug="${f.slug}" data-testid="film-media-${i}">
-      <img class="film-poster" src="assets/video/posters/${f.slug}.jpg" alt="${f.title}" loading="lazy">
+      <img class="film-poster" src="${poster}" alt="${f.title}" loading="lazy">
       <div class="film-play">
         <svg viewBox="0 0 24 24" fill="rgba(255,255,255,0.95)"><circle cx="12" cy="12" r="11" fill="rgba(8,21,33,0.5)" stroke="rgba(255,255,255,0.85)" stroke-width="1"/><path d="M10 8l6 4-6 4V8z"/></svg>
       </div>
-      <span class="film-badge">Muted preview · click for sound</span>
+      ${badge}
     </div>
     <div class="film-body">
       <div class="card-meta">${f.meta}</div>
@@ -178,6 +203,25 @@ films.forEach((f, i) => {
         const media = card.querySelector(".film-media");
         const slug = f.slug;
         let preview = null;
+
+        if (f.youtube) {
+                media.addEventListener("click", () => {
+                        if (media.classList.contains("is-playing")) return;
+                        const iframe = document.createElement("iframe");
+                        iframe.src = `https://www.youtube.com/embed/${f.youtube}?autoplay=1&rel=0`;
+                        iframe.className = "film-fullvideo";
+                        iframe.setAttribute("frameborder", "0");
+                        iframe.setAttribute(
+                                "allow",
+                                "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+                        );
+                        iframe.allowFullscreen = true;
+                        media.querySelector(".film-play")?.remove();
+                        media.classList.add("is-playing");
+                        media.appendChild(iframe);
+                });
+                return;
+        }
 
         media.addEventListener("mouseenter", () => {
                 if (media.classList.contains("is-playing") || preview) return;
