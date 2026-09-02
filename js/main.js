@@ -468,10 +468,10 @@ if (cursorDot && window.matchMedia("(pointer: fine)").matches) {
         });
 
         function renderCursor() {
-                dotX += (mouseX - dotX) * 0.14;
-                dotY += (mouseY - dotY) * 0.14;
-                cursorDot.style.left = dotX + "px";
-                cursorDot.style.top = dotY + "px";
+                dotX += (mouseX - dotX) * 0.35;
+                dotY += (mouseY - dotY) * 0.35;
+                cursorDot.style.transform =
+                        "translate3d(" + dotX + "px, " + dotY + "px, 0)";
                 requestAnimationFrame(renderCursor);
         }
         requestAnimationFrame(renderCursor);
