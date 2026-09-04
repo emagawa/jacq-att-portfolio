@@ -2382,8 +2382,15 @@ a.c-card:hover {
                 gap: 14px;
         }
         .hero-stats {
-                gap: 24px 26px;
-                flex-wrap: wrap;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                gap: 20px;
+                flex-wrap: nowrap;
+        }
+        .hero-stats .stat {
+                width: 100%;
         }
         .about-stats {
                 grid-template-columns: 1fr;
