@@ -63,3 +63,9 @@ Finish and polish the existing static portfolio for Jacqueline Magawa (aviation 
 - Layout/typography tweaks per reference cathemagawa.com: container max-width 1536px + 80px side padding (responsive 40/22px); nav links 14px/500/1.68px; footer copyright 15px + tagline (IBM Plex Sans style 14px/500, rgb(174,184,192)); back-to-top orange button (#f5842a, 46px circle) added.
 - Contact card: added "Preview Résumé" button (rust) next to "Download Résumé" (both 182x49, equal size); removed Résumé row from About.
 - Content edits: Education degrees, hero stat labels, footer text (current: "© 2026 Jacqueline. All rights reserved." + "Jacqueline Magawa — CS in Cybersecurity, Class of 2027"). Removed Aug 2021 FAA Student Pilot Flight Log entry.
+
+## Update (2026-09) — later iteration polish
+- Custom cursor: single smooth blue dot (#1e6fe6, 9px) cloned from magawa.website — transform translate3d + translate(-50%,-50%), opacity-only transition, rAF lerp factor 0.1 (trails at a distance, settles on stop). Hides on hover over links/buttons. Hidden on touch.
+- Mobile/tablet nav (<=1024px): changed from dark right slide-in to cathemagawa-style CREAM full-width TOP dropdown, dark navy left-aligned links, anchored below the 95px nav. Verified 100% (iteration_9).
+- Training Films: multiple clips added/replaced with self-hosted MP4s (faststart) + generated posters; many clips had audio replaced/sequenced/crossfaded with uploaded royalty-free tracks; first-flight clip has music segments at 0:35 / 4:40 / 8:38 / end with original cockpit audio hard-muted during music and full in gaps.
+- Numerous copy edits across About/Education/Flight Log/Gallery captions.

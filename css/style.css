@@ -2270,23 +2270,37 @@ a.c-card:hover {
         }
         .nav-links {
                 position: fixed;
-                inset: 0 0 0 auto;
-                width: min(78vw, 340px);
-                background: var(--ink);
+                top: 95px;
+                left: 0;
+                right: 0;
+                width: 100%;
+                background: var(--cream);
                 flex-direction: column;
-                justify-content: center;
-                padding: 40px;
-                gap: 18px;
-                transform: translateX(100%);
-                transition: transform 0.4s var(--ease);
+                align-items: stretch;
+                justify-content: flex-start;
+                gap: 2px;
+                padding: 10px 22px 26px;
+                transform: translateY(-115%);
+                opacity: 0;
+                transition:
+                        transform 0.4s var(--ease),
+                        opacity 0.3s var(--ease);
                 z-index: 90;
+                box-shadow: 0 22px 40px rgba(19, 41, 59, 0.14);
+                border-bottom: 1px solid rgba(19, 41, 59, 0.08);
         }
         .nav-links.open {
-                transform: none;
+                transform: translateY(0);
+                opacity: 1;
         }
         .nav-links .nav-link {
-                color: var(--cream);
-                font-size: 1rem;
+                color: var(--ink);
+                font-size: 1.4rem;
+                letter-spacing: 0;
+                text-transform: none;
+                width: 100%;
+                padding: 13px 0;
+                border-bottom: 1px solid rgba(19, 41, 59, 0.08);
         }
         .nav-cta {
                 display: none;
@@ -2324,26 +2338,6 @@ a.c-card:hover {
         }
         .container {
                 padding-inline: 22px;
-        }
-        .nav-links {
-                position: fixed;
-                inset: 0 0 0 auto;
-                width: min(78vw, 320px);
-                background: var(--ink);
-                flex-direction: column;
-                justify-content: center;
-                padding: 40px;
-                gap: 18px;
-                transform: translateX(100%);
-                transition: transform 0.4s var(--ease);
-                z-index: 90;
-        }
-        .nav-links.open {
-                transform: none;
-        }
-        .nav-links .nav-link {
-                color: var(--cream);
-                font-size: 1rem;
         }
         .nav-cta {
                 display: none;
