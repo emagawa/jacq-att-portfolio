@@ -1,12 +1,14 @@
 import os
 import asyncio
 import logging
+import time
 import html as html_lib
+from collections import defaultdict, deque
 from datetime import datetime, timezone
 
 import resend
 from dotenv import load_dotenv
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr, Field
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -38,6 +40,23 @@ class ContactRequest(BaseModel):
     subject: str = Field(default="", max_length=200)
     message: str = Field(..., min_length=1, max_length=5000)
     website: str = Field(default="")  # honeypot
+
+
+# Simple in-memory per-IP rate limiter for the public contact endpoint.
+RATE_LIMIT_MAX = 5          # allowed requests
+RATE_LIMIT_WINDOW = 600     # per 600 seconds (10 minutes)
+_rate_hits: dict[str, deque] = defaultdict(deque)
+
+
+def check_rate_limit(ip: str) -> bool:
+    now = time.monotonic()
+    hits = _rate_hits[ip]
+    while hits and now - hits[0] > RATE_LIMIT_WINDOW:
+        hits.popleft()
+    if len(hits) >= RATE_LIMIT_MAX:
+        return False
+    hits.append(now)
+    return True
 
 
 def build_email_html(name: str, email: str, subject: str, message: str) -> str:
@@ -81,7 +100,14 @@ async def health():
 
 
 @api.post("/contact")
-async def contact(payload: ContactRequest):
+async def contact(payload: ContactRequest, request: Request):
+    client_ip = request.client.host if request.client else "unknown"
+    if not check_rate_limit(client_ip):
+        raise HTTPException(
+            status_code=429,
+            detail="Too many messages. Please try again in a little while.",
+        )
+
     # Honeypot: silently accept bots without sending
     if payload.website.strip():
         return {"status": "success", "message": "Thanks — your message has been sent."}
@@ -119,7 +145,7 @@ app.include_router(api)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Content-Type"],
 )

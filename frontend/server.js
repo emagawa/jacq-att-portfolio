@@ -12,12 +12,29 @@ const HOST = process.env.HOST || "0.0.0.0";
 
 const HTTP_OK = 200;
 const HTTP_PARTIAL_CONTENT = 206;
-const HTTP_FORBIDDEN = 403;
 const HTTP_NOT_FOUND = 404;
 const HTTP_SERVER_ERROR = 500;
 const HTTP_RANGE_NOT_SATISFIABLE = 416;
 
 const CACHE_CONTROL = "public, max-age=3600";
+
+// Only these paths are publicly served. Everything else (backend/, .env,
+// .git/, source, config) is rejected so secrets and code are never exposed.
+const PUBLIC_FILES = new Set(["/index.html", "/favicon.ico", "/robots.txt"]);
+const PUBLIC_DIRS = ["assets/", "css/", "js/"];
+
+const SECURITY_HEADERS = {
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "SAMEORIGIN",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+};
+
+// Decide whether a repo-root-relative path is allowed to be served publicly.
+function isPublicPath(resolved) {
+  const rel = path.relative(ROOT, resolved).split(path.sep).join("/");
+  if (PUBLIC_FILES.has("/" + rel)) return true;
+  return PUBLIC_DIRS.some((dir) => rel.startsWith(dir));
+}
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -65,6 +82,7 @@ function handleRangeRequest(req, res, filePath, stat, type) {
     return;
   }
   res.writeHead(HTTP_PARTIAL_CONTENT, {
+    ...SECURITY_HEADERS,
     "Content-Type": type,
     "Content-Range": `bytes ${start}-${end}/${stat.size}`,
     "Accept-Ranges": "bytes",
@@ -77,6 +95,7 @@ function handleRangeRequest(req, res, filePath, stat, type) {
 // Serve a full (200) response.
 function serveFile(res, filePath, stat, type) {
   res.writeHead(HTTP_OK, {
+    ...SECURITY_HEADERS,
     "Content-Type": type,
     "Content-Length": stat.size,
     "Accept-Ranges": "bytes",
@@ -94,12 +113,15 @@ function serve(req, res, filePath, stat) {
   serveFile(res, filePath, stat, type);
 }
 
-// Resolve the request URL to a safe path inside ROOT, or null if it escapes.
+// Resolve the request URL to a safe, publicly-allowed path inside ROOT,
+// or null if it escapes ROOT or targets a non-public file.
 function resolvePath(reqUrl) {
   let urlPath = decodeURIComponent(reqUrl.split("?")[0]);
   if (urlPath === "/") urlPath = "/index.html";
   const resolved = path.normalize(path.join(ROOT, urlPath));
-  return resolved.startsWith(ROOT) ? resolved : null;
+  if (resolved !== ROOT && !resolved.startsWith(ROOT + path.sep)) return null;
+  if (!isPublicPath(resolved)) return null;
+  return resolved;
 }
 
 // Fall back to index.html (SPA-style) when the requested file is missing.
@@ -119,8 +141,8 @@ const server = http.createServer((req, res) => {
   try {
     const resolved = resolvePath(req.url);
     if (!resolved) {
-      res.writeHead(HTTP_FORBIDDEN);
-      res.end("Forbidden");
+      res.writeHead(HTTP_NOT_FOUND);
+      res.end("Not found");
       return;
     }
     fs.stat(resolved, (err, stat) => {
