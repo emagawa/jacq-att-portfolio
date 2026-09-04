@@ -6,19 +6,19 @@ BASE_URL = "https://8543c06b-ba8e-4866-97cc-a7adc4679f14.preview.emergentagent.c
 
 
 class TestHealth:
-    def test_health(self):
+    def test_health(self) -> None:
         r = requests.get(f"{BASE_URL}/api/health", timeout=15)
         assert r.status_code == 200
         assert r.json().get("status") == "healthy"
 
-    def test_root(self):
+    def test_root(self) -> None:
         r = requests.get(f"{BASE_URL}/api/", timeout=15)
         assert r.status_code == 200
         assert r.json().get("status") == "ok"
 
 
 class TestContact:
-    def test_contact_valid(self):
+    def test_contact_valid(self) -> None:
         payload = {
             "name": "TEST_Reviewer",
             "email": "test_reviewer@example.com",
@@ -31,7 +31,7 @@ class TestContact:
         assert data.get("status") == "success"
         assert "sent" in data.get("message", "").lower()
 
-    def test_contact_honeypot(self):
+    def test_contact_honeypot(self) -> None:
         payload = {
             "name": "TEST_Bot",
             "email": "bot@example.com",
@@ -44,7 +44,7 @@ class TestContact:
         assert r.status_code == 200
         assert r.json().get("status") == "success"
 
-    def test_contact_missing_email(self):
+    def test_contact_missing_email(self) -> None:
         payload = {
             "name": "TEST_NoEmail",
             "subject": "s",
@@ -53,7 +53,7 @@ class TestContact:
         r = requests.post(f"{BASE_URL}/api/contact", json=payload, timeout=15)
         assert r.status_code == 422
 
-    def test_contact_invalid_email(self):
+    def test_contact_invalid_email(self) -> None:
         payload = {
             "name": "TEST_BadEmail",
             "email": "not-an-email",
@@ -63,7 +63,7 @@ class TestContact:
         r = requests.post(f"{BASE_URL}/api/contact", json=payload, timeout=15)
         assert r.status_code == 422
 
-    def test_contact_empty_message(self):
+    def test_contact_empty_message(self) -> None:
         payload = {
             "name": "TEST_Empty",
             "email": "e@example.com",
