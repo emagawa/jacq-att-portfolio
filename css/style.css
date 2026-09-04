@@ -2395,6 +2395,11 @@ a.c-card:hover {
         .about-stats {
                 grid-template-columns: 1fr;
                 gap: 18px;
+                justify-items: center;
+                text-align: center;
+        }
+        .about-stat {
+                width: 100%;
         }
         .scroll-cue {
                 display: none;
