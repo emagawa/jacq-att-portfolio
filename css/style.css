@@ -2279,8 +2279,8 @@ a.c-card:hover {
                 flex-direction: column;
                 align-items: stretch;
                 justify-content: flex-start;
-                gap: 2px;
-                padding: 10px 22px 26px;
+                gap: 16px;
+                padding: 24px 22px 30px;
                 transform: translateY(-115%);
                 opacity: 0;
                 transition:
@@ -2302,8 +2302,8 @@ a.c-card:hover {
                 letter-spacing: -0.48px;
                 text-transform: none;
                 width: 100%;
-                padding: 13px 0;
-                border-bottom: 1px solid rgba(19, 41, 59, 0.08);
+                padding: 0;
+                border-bottom: none;
         }
         .nav-cta {
                 display: none;
