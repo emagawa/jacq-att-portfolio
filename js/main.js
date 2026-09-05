@@ -446,10 +446,15 @@ const cursorDot = document.getElementById("cursorDot");
 if (cursorDot && window.matchMedia("(pointer: fine)").matches) {
         let mouseX = window.innerWidth / 2;
         let mouseY = window.innerHeight / 2;
+        let prevMouseX = mouseX,
+                prevMouseY = mouseY;
+        let velX = 0,
+                velY = 0;
         let dotX = mouseX,
                 dotY = mouseY;
         let visible = false;
         const HALF = 4.5; // half of the 9px dot, baked in to center it
+        const TRAIL = 3.2; // how far the dot lags behind the pointer while moving
 
         window.addEventListener(
                 "mousemove",
@@ -469,8 +474,16 @@ if (cursorDot && window.matchMedia("(pointer: fine)").matches) {
         });
 
         function renderCursor() {
-                dotX += (mouseX - dotX) * 0.12;
-                dotY += (mouseY - dotY) * 0.12;
+                // Smooth velocity of the pointer, decaying to 0 when it stops.
+                velX += ((mouseX - prevMouseX) - velX) * 0.25;
+                velY += ((mouseY - prevMouseY) - velY) * 0.25;
+                prevMouseX = mouseX;
+                prevMouseY = mouseY;
+                // Target sits behind the pointer along the direction of motion.
+                const targetX = mouseX - velX * TRAIL;
+                const targetY = mouseY - velY * TRAIL;
+                dotX += (targetX - dotX) * 0.12;
+                dotY += (targetY - dotY) * 0.12;
                 cursorDot.style.transform =
                         "translate3d(" + (dotX - HALF) + "px, " + (dotY - HALF) + "px, 0)";
                 requestAnimationFrame(renderCursor);
