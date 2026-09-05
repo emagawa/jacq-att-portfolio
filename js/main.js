@@ -469,8 +469,8 @@ if (cursorDot && window.matchMedia("(pointer: fine)").matches) {
         });
 
         function renderCursor() {
-                dotX += (mouseX - dotX) * 0.08;
-                dotY += (mouseY - dotY) * 0.08;
+                dotX += (mouseX - dotX) * 0.12;
+                dotY += (mouseY - dotY) * 0.12;
                 cursorDot.style.transform =
                         "translate3d(" + (dotX - HALF) + "px, " + (dotY - HALF) + "px, 0)";
                 requestAnimationFrame(renderCursor);
