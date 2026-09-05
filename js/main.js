@@ -449,6 +449,7 @@ if (cursorDot && window.matchMedia("(pointer: fine)").matches) {
         let dotX = mouseX,
                 dotY = mouseY;
         let visible = false;
+        const HALF = 4.5; // half of the 9px dot, baked in to center it
 
         window.addEventListener(
                 "mousemove",
@@ -468,10 +469,10 @@ if (cursorDot && window.matchMedia("(pointer: fine)").matches) {
         });
 
         function renderCursor() {
-                dotX += (mouseX - dotX) * 0.1;
-                dotY += (mouseY - dotY) * 0.1;
+                dotX += (mouseX - dotX) * 0.16;
+                dotY += (mouseY - dotY) * 0.16;
                 cursorDot.style.transform =
-                        "translate3d(" + dotX + "px, " + dotY + "px, 0) translate(-50%, -50%)";
+                        "translate3d(" + (dotX - HALF) + "px, " + (dotY - HALF) + "px, 0)";
                 requestAnimationFrame(renderCursor);
         }
         requestAnimationFrame(renderCursor);
