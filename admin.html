@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Messages · Jacqueline Magawa</title>
+    <link rel="icon" href="assets/img/favicon.png" type="image/png" />
+    <style>
+      :root {
+        --cream: #f3f1ea;
+        --ink: #13293b;
+        --rust: #c0503c;
+        --muted: #8a8577;
+        --line: #e3ded2;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--ink);
+        font-family: "Outfit", system-ui, -apple-system, sans-serif;
+        padding: 40px 22px 80px;
+      }
+      .wrap { max-width: 900px; margin: 0 auto; }
+      h1 { font-size: 28px; font-weight: 600; margin: 0 0 4px; }
+      .sub { color: var(--muted); font-size: 14px; margin: 0 0 28px; }
+      .gate { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 26px; max-width: 420px; }
+      .gate label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+      input[type="password"] {
+        width: 100%; padding: 12px 14px; border: 1px solid var(--line);
+        border-radius: 10px; font-size: 15px; margin-bottom: 14px; font-family: inherit;
+      }
+      button {
+        background: var(--ink); color: var(--cream); border: 0; border-radius: 999px;
+        padding: 12px 24px; font-size: 15px; cursor: pointer; font-family: inherit;
+        transition: background-color 0.2s ease;
+      }
+      button:hover { background: var(--rust); }
+      .err { color: var(--rust); font-size: 14px; margin-top: 10px; min-height: 18px; }
+      .stats { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
+      .stat {
+        background: #fff; border: 1px solid var(--line); border-radius: 14px;
+        padding: 20px 24px; flex: 1; min-width: 160px;
+      }
+      .stat .num { font-size: 40px; font-weight: 700; line-height: 1; color: var(--rust); }
+      .stat .lbl { font-size: 13px; color: var(--muted); margin-top: 8px; text-transform: uppercase; letter-spacing: 1px; }
+      .card { background: #fff; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin-bottom: 24px; }
+      .card h2 { font-size: 15px; margin: 0; padding: 16px 20px; border-bottom: 1px solid var(--line); text-transform: uppercase; letter-spacing: 1px; color: var(--muted); font-weight: 600; }
+      table { width: 100%; border-collapse: collapse; font-size: 14px; }
+      th, td { text-align: left; padding: 12px 20px; border-bottom: 1px solid var(--line); vertical-align: top; }
+      th { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+      tr:last-child td { border-bottom: 0; }
+      .msg { color: #2c3e50; white-space: pre-wrap; }
+      .empty { padding: 40px 20px; text-align: center; color: var(--muted); }
+      .hidden { display: none; }
+      .when { color: var(--muted); white-space: nowrap; }
+      .day-row { display: flex; justify-content: space-between; padding: 10px 20px; border-bottom: 1px solid var(--line); font-size: 14px; }
+      .day-row:last-child { border-bottom: 0; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Contact Messages</h1>
+      <p class="sub">Private dashboard · jacqmagawa.com</p>
+
+      <div id="gate" class="gate">
+        <label for="token">Access token</label>
+        <input id="token" type="password" data-testid="admin-token-input" placeholder="Enter admin token" />
+        <button id="loginBtn" data-testid="admin-login-btn">View messages</button>
+        <div id="err" class="err" data-testid="admin-error"></div>
+      </div>
+
+      <div id="dash" class="hidden">
+        <div class="stats">
+          <div class="stat">
+            <div class="num" id="total" data-testid="admin-total">0</div>
+            <div class="lbl">Total messages</div>
+          </div>
+          <div class="stat">
+            <div class="num" id="last7" data-testid="admin-last7">0</div>
+            <div class="lbl">Last 7 days</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>By day</h2>
+          <div id="byday"></div>
+        </div>
+
+        <div class="card">
+          <h2>Recent messages</h2>
+          <div id="tableWrap"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const API = (window.__API__ || "") + "/api/admin/messages";
+      const gate = document.getElementById("gate");
+      const dash = document.getElementById("dash");
+      const err = document.getElementById("err");
+
+      function fmt(iso) {
+        if (!iso) return "";
+        const d = new Date(iso);
+        if (isNaN(d)) return iso;
+        return d.toLocaleString(undefined, {
+          month: "short", day: "numeric", year: "numeric",
+          hour: "numeric", minute: "2-digit",
+        });
+      }
+
+      function esc(s) {
+        const div = document.createElement("div");
+        div.textContent = s == null ? "" : String(s);
+        return div.innerHTML;
+      }
+
+      async function load() {
+        const token = document.getElementById("token").value.trim();
+        err.textContent = "";
+        if (!token) { err.textContent = "Please enter your token."; return; }
+        let res;
+        try {
+          res = await fetch(API + "?token=" + encodeURIComponent(token));
+        } catch (e) {
+          err.textContent = "Network error. Please try again.";
+          return;
+        }
+        if (res.status === 401) { err.textContent = "Invalid token."; return; }
+        if (!res.ok) { err.textContent = "Something went wrong (" + res.status + ")."; return; }
+        const data = await res.json();
+        render(data);
+      }
+
+      function render(data) {
+        gate.classList.add("hidden");
+        dash.classList.remove("hidden");
+        document.getElementById("total").textContent = data.total;
+
+        const now = Date.now();
+        const weekAgo = now - 7 * 24 * 60 * 60 * 1000;
+        const last7 = (data.messages || []).filter((m) => {
+          const t = new Date(m.created_at).getTime();
+          return !isNaN(t) && t >= weekAgo;
+        }).length;
+        document.getElementById("last7").textContent = last7;
+
+        const byday = document.getElementById("byday");
+        if (!data.by_day || !data.by_day.length) {
+          byday.innerHTML = '<div class="empty">No messages yet.</div>';
+        } else {
+          byday.innerHTML = data.by_day.map((d) =>
+            '<div class="day-row"><span>' + esc(d.date) + '</span><strong>' + d.count + '</strong></div>'
+          ).join("");
+        }
+
+        const wrap = document.getElementById("tableWrap");
+        if (!data.messages || !data.messages.length) {
+          wrap.innerHTML = '<div class="empty">No messages yet.</div>';
+          return;
+        }
+        const rows = data.messages.map((m) =>
+          "<tr>" +
+            '<td class="when">' + esc(fmt(m.created_at)) + "</td>" +
+            "<td><strong>" + esc(m.name) + "</strong><br><span style='color:#8a8577'>" + esc(m.email) + "</span></td>" +
+            "<td>" + esc(m.subject || "(no subject)") + '<br><span class="msg">' + esc(m.message) + "</span></td>" +
+          "</tr>"
+        ).join("");
+        wrap.innerHTML =
+          "<table><thead><tr><th>When</th><th>From</th><th>Subject / Message</th></tr></thead><tbody>" +
+          rows + "</tbody></table>";
+      }
+
+      document.getElementById("loginBtn").addEventListener("click", load);
+      document.getElementById("token").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") load();
+      });
+    </script>
+  </body>
+</html>
