@@ -64,8 +64,20 @@ Finish and polish the existing static portfolio for Jacqueline Magawa (aviation 
 - Contact card: added "Preview Résumé" button (rust) next to "Download Résumé" (both 182x49, equal size); removed Résumé row from About.
 - Content edits: Education degrees, hero stat labels, footer text (current: "© 2026 Jacqueline. All rights reserved." + "Jacqueline Magawa — CS in Cybersecurity, Class of 2027"). Removed Aug 2021 FAA Student Pilot Flight Log entry.
 
-## Update (2026-09) — later iteration polish
-- Custom cursor: single smooth blue dot (#1e6fe6, 9px) cloned from magawa.website — transform translate3d + translate(-50%,-50%), opacity-only transition, rAF lerp factor 0.1 (trails at a distance, settles on stop). Hides on hover over links/buttons. Hidden on touch.
-- Mobile/tablet nav (<=1024px): changed from dark right slide-in to cathemagawa-style CREAM full-width TOP dropdown, dark navy left-aligned links, anchored below the 95px nav. Verified 100% (iteration_9).
-- Training Films: multiple clips added/replaced with self-hosted MP4s (faststart) + generated posters; many clips had audio replaced/sequenced/crossfaded with uploaded royalty-free tracks; first-flight clip has music segments at 0:35 / 4:40 / 8:38 / end with original cockpit audio hard-muted during music and full in gaps.
-- Numerous copy edits across About/Education/Flight Log/Gallery captions.
+## Update (2026-06) — later iteration polish
+- Custom cursor: single smooth emerald-green dot (#10b981, 9px) — single `translate3d` transform with centering offset baked into JS (removed the double-transform that caused subpixel jitter), opacity-only transition, rAF lerp factor 0.12 + velocity-based trailing offset (TRAIL 3.2) so the dot lags further behind the pointer while moving and glides in to settle exactly on it when the mouse stops. Hides on hover over links/buttons. Hidden on touch.
+- Mobile/tablet nav (<=1024px): cathemagawa-style CREAM full-width TOP dropdown; links restyled to match reference mobile menu exactly (Outfit 24px, weight 300, letter-spacing -0.48px, title-case); dividing borders removed, 16px gap, compact panel (no longer fills screen).
+- Hero portrait: swapped to new professional headshot (assets/img/portrait.png, currently the dark-background version) with a deeper multi-layer drop shadow.
+- Mobile centering: hero-stats and about-stats stacked and centered on <=720px.
+- Footer tagline updated to "Jacqueline Magawa — Computer Science, minor in Cybersecurity, Class of 2027".
+
+## Security hardening (2026-06)
+- SEC-001 (CRITICAL, fixed): static server (frontend/server.js) now serves ONLY an allowlist (index.html, css/, js/, assets/); backend/.env, .git, source, memory/, test_reports/ all return 404 (were previously downloadable). ACTION FOR USER: rotate the Resend API key since it was publicly reachable before this fix.
+- SEC-002 (MEDIUM, fixed): per-IP in-memory rate limit on POST /api/contact (5 req / 10 min → 429).
+- SEC-003 (LOW, fixed): CORS tightened — allow_credentials=False, methods GET/POST/OPTIONS, header Content-Type.
+- Hardening: security headers on all static responses (X-Content-Type-Options nosniff, X-Frame-Options SAMEORIGIN, Referrer-Policy); path-prefix check uses trailing separator.
+- server.js refactored (complexity reduced, named HTTP status constants, removed prod console.log); test_backend.py functions given return type hints.
+
+## Deployment readiness (2026-06)
+- deployment_agent health check: PASS, no blockers. Only INFO: preview URL still in index.html OG/canonical meta tags and in test_backend.py BASE_URL — update to production domain after go-live (user does not yet have a domain).
+
