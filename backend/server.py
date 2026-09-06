@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 import resend
 from dotenv import load_dotenv
 from fastapi import FastAPI, APIRouter, HTTPException, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr, Field
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -312,6 +312,22 @@ async def contact(payload: ContactRequest, request: Request):
         logger.error(f"Failed to send auto-reply: {e}")
 
     return {"status": "success", "message": "Thanks — your message has been sent."}
+
+
+@api.get("/sitemap.xml")
+async def sitemap():
+    xml = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        "  <url>\n"
+        "    <loc>https://jacqmagawa.com/</loc>\n"
+        "    <lastmod>2026-06-06</lastmod>\n"
+        "    <changefreq>monthly</changefreq>\n"
+        "    <priority>1.0</priority>\n"
+        "  </url>\n"
+        "</urlset>\n"
+    )
+    return Response(content=xml, media_type="application/xml")
 
 
 @api.get("/admin", response_class=HTMLResponse)

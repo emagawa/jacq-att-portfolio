@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/admin
 
-Sitemap: https://jacqmagawa.com/sitemap.xml
+Sitemap: https://jacqmagawa.com/api/sitemap.xml
