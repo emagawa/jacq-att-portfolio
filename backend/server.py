@@ -205,6 +205,14 @@ async def admin_messages(token: str = ""):
     }
 
 
+@api.delete("/admin/messages")
+async def admin_clear_messages(token: str = ""):
+    if not ADMIN_TOKEN or not hmac.compare_digest(token, ADMIN_TOKEN):
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    result = await db.contact_messages.delete_many({})
+    return {"status": "cleared", "deleted": result.deleted_count}
+
+
 app.include_router(api)
 
 app.add_middleware(
