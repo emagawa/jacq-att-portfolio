@@ -106,3 +106,10 @@ Finish and polish the existing static portfolio for Jacqueline Magawa (aviation 
 - NOTE: uncommitted /api/admin route was lost once to a platform reset to last commit; re-added. Sandbox resume_events + contact_messages cleared before deploy so MONGODB_MIGRATE doesn't carry test data to prod.
 - REQUIRES RE-DEPLOY for /api/admin dashboard + résumé tracking to go live on jacqmagawa.com.
 
+## SEO / Google Search Console (2026-06) — COMPLETE
+- Ownership verified via HTML-tag method: <meta name="google-site-verification" content="O1eQb3070F7YRxMfTstngAh38rn86dI0sbJe6DB02RY"> in index.html <head>. (HTML-file method googlee2baf0cc1b65fae8.html does NOT work in prod — SPA catch-all serves homepage for root files.)
+- Sitemap: served by BACKEND at GET /api/sitemap.xml (Response media_type application/xml). Submitted in GSC as api/sitemap.xml → SUCCESS. Root /sitemap.xml and /robots.txt do NOT work in production (catch-all returns homepage), so the /api route is the canonical sitemap URL.
+- robots.txt (static, works only in preview) Sitemap directive points to https://jacqmagawa.com/api/sitemap.xml.
+- KEY LEARNING: on this Emergent static-hosting, ANY root-level loose file (sitemap.xml, robots.txt, admin.html, google verification .html) is intercepted by the SPA homepage catch-all. Only index.html, /assets, /css, /js and /api/* serve real content. Serve SEO/verification assets via /api/* or a homepage meta tag.
+- Admin dashboard title tab + favicon + Back-to-site/Sign-out added (served via /api/admin).
+
