@@ -450,7 +450,7 @@ if (cursorDot && window.matchMedia("(pointer: fine)").matches) {
                 dotY = mouseY;
         let visible = false;
         const HALF = 4.5; // half of the 9px dot, baked in to center it
-        const EASE = 0.1; // lower = longer, smoother trail that settles on stop
+        const EASE = 0.15; // lower = longer, smoother trail that settles on stop
 
         window.addEventListener(
                 "mousemove",
