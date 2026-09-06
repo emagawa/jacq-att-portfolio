@@ -354,6 +354,25 @@ const resumeModal = document.getElementById("resumeModal");
 const resumeFrameWrap = document.getElementById("resumeFrameWrap");
 const RESUME_PDF = "assets/resume-jacqueline-magawa.pdf";
 
+function trackResume(event) {
+        try {
+                const body = JSON.stringify({ event });
+                if (navigator.sendBeacon) {
+                        navigator.sendBeacon(
+                                "/api/track/resume",
+                                new Blob([body], { type: "application/json" })
+                        );
+                } else {
+                        fetch("/api/track/resume", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body,
+                                keepalive: true,
+                        }).catch(() => {});
+                }
+        } catch (e) {}
+}
+
 function openResume() {
         if (!resumeFrameWrap.querySelector("iframe")) {
                 const frame = document.createElement("iframe");
@@ -364,6 +383,7 @@ function openResume() {
         }
         resumeModal.classList.add("open");
         document.body.style.overflow = "hidden";
+        trackResume("preview");
 }
 function closeResume() {
         resumeModal.classList.remove("open");
@@ -375,6 +395,9 @@ document.querySelectorAll("[data-resume-open]").forEach((btn) => {
                 e.preventDefault();
                 openResume();
         });
+});
+document.querySelectorAll('a[href$="resume-jacqueline-magawa.pdf"]').forEach((link) => {
+        link.addEventListener("click", () => trackResume("download"));
 });
 document.getElementById("resumeClose").addEventListener("click", closeResume);
 resumeModal.addEventListener("click", (e) => {

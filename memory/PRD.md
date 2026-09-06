@@ -96,3 +96,13 @@ Finish and polish the existing static portfolio for Jacqueline Magawa (aviation 
 - P2: Point production Mongo/monitoring; consider Resend plan (monthly quota shown ~10-12; each submit sends 2 emails).
 - P3: Optional — scope CORS to jacqmagawa.com origin; parameterize test_backend.py BASE_URL via env.
 
+## Update (2026-06) — dashboard fix + résumé analytics
+- DASHBOARD MOVED TO BACKEND: /admin.html does NOT work in production (Emergent SPA catch-all serves index.html). Dashboard now served by backend at GET /api/admin (HTMLResponse constant ADMIN_DASHBOARD_HTML in server.py). Production URL: https://jacqmagawa.com/api/admin. Bypasses the catch-all because /api/* routes to the backend container.
+- Résumé analytics (user picked: track BOTH preview opens AND PDF downloads):
+  - Backend: POST /api/track/resume {event:"preview"|"download"} → inserts into resume_events collection (public, validated to 2 event types). GET /api/admin/messages now returns a "resume" block {preview_total, download_total, by_day:[{date,preview,download}]}.
+  - Frontend (js/main.js): trackResume() uses navigator.sendBeacon (fallback fetch keepalive). Fires "preview" in openResume(); fires "download" on every anchor href$="resume-jacqueline-magawa.pdf" (covers contact-section download link + modal download button).
+  - Dashboard shows Résumé previews / downloads stat cards + "Résumé activity by day".
+- User declined Message Notifications and Spam Shield (existing honeypot + rate limit kept).
+- NOTE: uncommitted /api/admin route was lost once to a platform reset to last commit; re-added. Sandbox resume_events + contact_messages cleared before deploy so MONGODB_MIGRATE doesn't carry test data to prod.
+- REQUIRES RE-DEPLOY for /api/admin dashboard + résumé tracking to go live on jacqmagawa.com.
+
