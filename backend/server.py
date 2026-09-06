@@ -40,7 +40,7 @@ ADMIN_DASHBOARD_HTML = """<!doctype html>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Messages · Jacqueline Magawa</title>
+    <title>Jacqueline Magawa | Aviation Enthusiast &amp; Cybersecurity / CS Student</title>
     <link rel="icon" type="image/png" href="/assets/img/favicon-32.png" />
     <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
     <style>
