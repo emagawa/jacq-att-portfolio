@@ -41,6 +41,8 @@ ADMIN_DASHBOARD_HTML = """<!doctype html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
     <title>Messages · Jacqueline Magawa</title>
+    <link rel="icon" type="image/png" href="/assets/img/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
     <style>
       :root { --cream:#f3f1ea; --ink:#13293b; --rust:#c0503c; --muted:#8a8577; --line:#e3ded2; }
       * { box-sizing: border-box; }
@@ -72,10 +74,19 @@ ADMIN_DASHBOARD_HTML = """<!doctype html>
       .day-row:last-child { border-bottom:0; }
       .day-row .counts span { margin-left:16px; color:var(--muted); }
       .day-row .counts strong { color:var(--ink); }
+      .topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:26px; }
+      .backlink { color:var(--ink); text-decoration:none; font-size:12px; text-transform:uppercase; letter-spacing:2px; font-family:ui-monospace,"JetBrains Mono",monospace; transition:color .2s ease; }
+      .backlink:hover { color:var(--rust); }
+      .signout { background:transparent; color:var(--muted); border:1px solid var(--line); border-radius:999px; padding:8px 18px; font-size:12px; text-transform:uppercase; letter-spacing:2px; cursor:pointer; font-family:ui-monospace,"JetBrains Mono",monospace; transition:all .2s ease; }
+      .signout:hover { background:var(--ink); color:var(--cream); border-color:var(--ink); }
     </style>
   </head>
   <body>
     <div class="wrap">
+      <div class="topbar">
+        <a class="backlink" href="/">&larr; Back to site</a>
+        <button id="signOut" type="button" class="signout hidden">Sign out</button>
+      </div>
       <h1>Contact Messages</h1>
       <p class="sub">Private dashboard · jacqmagawa.com</p>
       <div id="gate" class="gate">
@@ -118,6 +129,7 @@ ADMIN_DASHBOARD_HTML = """<!doctype html>
       }
       function render(data){
         gate.classList.add("hidden"); dash.classList.remove("hidden");
+        document.getElementById("signOut").classList.remove("hidden");
         document.getElementById("total").textContent = data.total;
         var weekAgo = Date.now() - 7*24*60*60*1000;
         var last7 = (data.messages||[]).filter(function(m){ var t=new Date(m.created_at).getTime(); return !isNaN(t) && t>=weekAgo; }).length;
@@ -140,6 +152,13 @@ ADMIN_DASHBOARD_HTML = """<!doctype html>
       }
       document.getElementById("loginBtn").addEventListener("click", load);
       document.getElementById("token").addEventListener("keydown", function(e){ if(e.key==="Enter") load(); });
+      document.getElementById("signOut").addEventListener("click", function(){
+        document.getElementById("token").value = "";
+        dash.classList.add("hidden");
+        gate.classList.remove("hidden");
+        document.getElementById("signOut").classList.add("hidden");
+        err.textContent = "";
+      });
     </script>
   </body>
 </html>"""
