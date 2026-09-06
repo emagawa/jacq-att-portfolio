@@ -20,7 +20,7 @@ const CACHE_CONTROL = "public, max-age=3600";
 
 // Only these paths are publicly served. Everything else (backend/, .env,
 // .git/, source, config) is rejected so secrets and code are never exposed.
-const PUBLIC_FILES = new Set(["/index.html", "/admin.html", "/favicon.ico", "/robots.txt"]);
+const PUBLIC_FILES = new Set(["/index.html", "/admin.html", "/googlee2baf0cc1b65fae8.html", "/favicon.ico", "/robots.txt"]);
 const PUBLIC_DIRS = ["assets/", "css/", "js/"];
 
 const SECURITY_HEADERS = {
