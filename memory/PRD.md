@@ -113,3 +113,10 @@ Finish and polish the existing static portfolio for Jacqueline Magawa (aviation 
 - KEY LEARNING: on this Emergent static-hosting, ANY root-level loose file (sitemap.xml, robots.txt, admin.html, google verification .html) is intercepted by the SPA homepage catch-all. Only index.html, /assets, /css, /js and /api/* serve real content. Serve SEO/verification assets via /api/* or a homepage meta tag.
 - Admin dashboard title tab + favicon + Back-to-site/Sign-out added (served via /api/admin).
 
+## Update (2026-06) — Top résumé days + Weekly email digest
+- Top résumé days: dashboard card ranks days by total résumé interest (previews+downloads) desc, top 5, 🔥 on the busiest. Computed client-side from the existing resume.by_day data.
+- Weekly email digest: APScheduler (added to requirements.txt: APScheduler, tzlocal) AsyncIOScheduler cron Mondays 08:00 America/New_York → send_weekly_digest(). Emails RECIPIENT_EMAIL a summary of the last 7 days (message count, résumé previews/downloads, top résumé days, recent messages) via Resend. Dedup guard: db.digest_log keyed by ISO week ("YYYY-Wnn") so restarts/multiple schedulers don't double-send.
+- Manual trigger: token-protected POST /api/admin/send-digest (force=True) + a "Send weekly digest now" button in the dashboard. Verified: sends real email, returns {status:"sent", stats}.
+- Helpers in server.py: compute_digest_stats(), build_digest_html(), send_weekly_digest(force).
+- NOTE: requires re-deploy (new dependency + backend routes + scheduler). In prod single uvicorn worker → one scheduler; dev reload shows 2 but the week-key guard prevents duplicate emails.
+

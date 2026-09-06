@@ -5,7 +5,7 @@ import logging
 import time
 import html as html_lib
 from collections import defaultdict, deque
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 import resend
 from dotenv import load_dotenv
@@ -14,6 +14,8 @@ from fastapi.responses import HTMLResponse, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr, Field
 from motor.motor_asyncio import AsyncIOMotorClient
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from apscheduler.triggers.cron import CronTrigger
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 load_dotenv(os.path.join(ROOT_DIR, ".env"))
@@ -79,6 +81,11 @@ ADMIN_DASHBOARD_HTML = """<!doctype html>
       .backlink:hover { color:var(--rust); }
       .signout { background:transparent; color:var(--muted); border:1px solid var(--line); border-radius:999px; padding:8px 18px; font-size:12px; text-transform:uppercase; letter-spacing:2px; cursor:pointer; font-family:ui-monospace,"JetBrains Mono",monospace; transition:all .2s ease; }
       .signout:hover { background:var(--ink); color:var(--cream); border-color:var(--ink); }
+      .digestbar { display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin:8px 0 20px; }
+      .digestbtn { background:var(--rust); color:#fff; border:0; border-radius:999px; padding:12px 26px; font-size:14px; cursor:pointer; font-family:inherit; transition:opacity .2s ease; }
+      .digestbtn:hover { opacity:0.88; }
+      .digestbtn:disabled { opacity:0.5; cursor:default; }
+      .digestmsg { font-size:14px; }
     </style>
   </head>
   <body>
@@ -104,9 +111,14 @@ ADMIN_DASHBOARD_HTML = """<!doctype html>
           <div class="stat"><div class="num" id="resPreview">0</div><div class="lbl">Résumé previews</div></div>
           <div class="stat"><div class="num" id="resDownload">0</div><div class="lbl">Résumé downloads</div></div>
         </div>
+        <div class="card"><h2>Top résumé days</h2><div id="topResDays"></div></div>
         <div class="card"><h2>Résumé activity by day</h2><div id="resByday"></div></div>
         <div class="card"><h2>Messages by day</h2><div id="byday"></div></div>
         <div class="card"><h2>Recent messages</h2><div id="tableWrap"></div></div>
+        <div class="digestbar">
+          <button id="digestBtn" type="button" class="digestbtn">Send weekly digest now</button>
+          <span id="digestMsg" class="digestmsg"></span>
+        </div>
       </div>
     </div>
     <script>
@@ -140,6 +152,13 @@ ADMIN_DASHBOARD_HTML = """<!doctype html>
         var resByday = document.getElementById("resByday");
         if(!r.by_day || !r.by_day.length){ resByday.innerHTML='<div class="empty">No résumé activity yet.</div>'; }
         else { resByday.innerHTML = r.by_day.map(function(d){ return '<div class="day-row"><span>'+esc(d.date)+'</span><span class="counts"><span>previews <strong>'+d.preview+'</strong></span><span>downloads <strong>'+d.download+'</strong></span></span></div>'; }).join(""); }
+        var topEl = document.getElementById("topResDays");
+        var ranked = (r.by_day || []).map(function(d){ return {date:d.date, total:(d.preview||0)+(d.download||0), preview:d.preview||0, download:d.download||0}; })
+          .filter(function(d){ return d.total>0; })
+          .sort(function(a,b){ return b.total-a.total; })
+          .slice(0,5);
+        if(!ranked.length){ topEl.innerHTML='<div class="empty">No résumé activity yet.</div>'; }
+        else { topEl.innerHTML = ranked.map(function(d,i){ return '<div class="day-row"><span>'+(i===0?'🔥 ':'')+esc(d.date)+'</span><span class="counts"><strong>'+d.total+'</strong> views <span>('+d.preview+' prev · '+d.download+' dl)</span></span></div>'; }).join(""); }
         var byday = document.getElementById("byday");
         if(!data.by_day || !data.by_day.length){ byday.innerHTML='<div class="empty">No messages yet.</div>'; }
         else { byday.innerHTML = data.by_day.map(function(d){ return '<div class="day-row"><span>'+esc(d.date)+'</span><strong>'+d.count+'</strong></div>'; }).join(""); }
@@ -152,6 +171,20 @@ ADMIN_DASHBOARD_HTML = """<!doctype html>
       }
       document.getElementById("loginBtn").addEventListener("click", load);
       document.getElementById("token").addEventListener("keydown", function(e){ if(e.key==="Enter") load(); });
+      document.getElementById("digestBtn").addEventListener("click", async function(){
+        var token = document.getElementById("token").value.trim();
+        var msg = document.getElementById("digestMsg");
+        var btn = document.getElementById("digestBtn");
+        btn.disabled = true; msg.textContent = "Sending…"; msg.style.color = "#8a8577";
+        try {
+          var res = await fetch("/api/admin/send-digest?token=" + encodeURIComponent(token), { method: "POST" });
+          var data = await res.json();
+          if(res.ok && data.status === "sent"){ msg.textContent = "✓ Digest emailed (" + data.stats.messages + " messages, " + (data.stats.previews + data.stats.downloads) + " résumé views)"; msg.style.color = "#2e7d32"; }
+          else if(data.status === "error"){ msg.textContent = "Failed to send: " + (data.detail || "error"); msg.style.color = "#c0503c"; }
+          else { msg.textContent = "Could not send (" + res.status + ")"; msg.style.color = "#c0503c"; }
+        } catch(e){ msg.textContent = "Network error."; msg.style.color = "#c0503c"; }
+        btn.disabled = false;
+      });
       document.getElementById("signOut").addEventListener("click", function(){
         document.getElementById("token").value = "";
         dash.classList.add("hidden");
@@ -394,6 +427,145 @@ async def track_resume(payload: TrackEvent):
         {"event": payload.event, "created_at": datetime.now(timezone.utc).isoformat()}
     )
     return {"status": "ok"}
+
+
+async def compute_digest_stats():
+    since = datetime.now(timezone.utc) - timedelta(days=7)
+    since_iso = since.isoformat()
+    messages = await db.contact_messages.find(
+        {"created_at": {"$gte": since_iso}}, {"_id": 0}
+    ).sort("created_at", -1).to_list(length=1000)
+    resume_docs = await db.resume_events.find(
+        {"created_at": {"$gte": since_iso}}, {"_id": 0}
+    ).to_list(length=100000)
+    previews = sum(1 for d in resume_docs if d.get("event") == "preview")
+    downloads = sum(1 for d in resume_docs if d.get("event") == "download")
+    by_day: dict[str, int] = defaultdict(int)
+    for d in resume_docs:
+        day = (d.get("created_at") or "")[:10]
+        if day and d.get("event") in ("preview", "download"):
+            by_day[day] += 1
+    top_days = sorted(by_day.items(), key=lambda kv: kv[1], reverse=True)[:3]
+    return {
+        "messages": messages,
+        "message_count": len(messages),
+        "previews": previews,
+        "downloads": downloads,
+        "resume_total": previews + downloads,
+        "top_days": [{"date": k, "count": v} for k, v in top_days],
+    }
+
+
+def build_digest_html(stats: dict) -> str:
+    period_end = datetime.now(timezone.utc).strftime("%b %d, %Y")
+    period_start = (datetime.now(timezone.utc) - timedelta(days=7)).strftime("%b %d")
+    top_rows = "".join(
+        f'<tr><td style="padding:6px 0;color:#12283a;">{html_lib.escape(d["date"])}</td>'
+        f'<td style="padding:6px 0;text-align:right;color:#c0503c;font-weight:700;">{d["count"]}</td></tr>'
+        for d in stats["top_days"]
+    ) or '<tr><td style="padding:6px 0;color:#8a8577;" colspan="2">No résumé activity this week.</td></tr>'
+    msg_rows = "".join(
+        f'<tr><td style="padding:8px 0;border-top:1px solid #eee;">'
+        f'<strong style="color:#12283a;">{html_lib.escape(m.get("name",""))}</strong> '
+        f'<span style="color:#8a8577;">&lt;{html_lib.escape(m.get("email",""))}&gt;</span><br>'
+        f'<span style="color:#555;">{html_lib.escape((m.get("subject") or "(no subject)"))}</span></td></tr>'
+        for m in stats["messages"][:8]
+    ) or '<tr><td style="padding:8px 0;color:#8a8577;">No new messages this week.</td></tr>'
+    return f"""
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:#f3f1ea;padding:28px 0;font-family:Arial,Helvetica,sans-serif;">
+      <tr><td align="center">
+        <table width="580" cellpadding="0" cellspacing="0" style="background:#ffffff;border:1px solid #e3ded2;border-radius:14px;overflow:hidden;">
+          <tr><td style="background:#12283a;padding:24px 30px;">
+            <div style="color:#e9c46a;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Weekly Digest</div>
+            <div style="color:#f3f1ea;font-size:22px;font-weight:700;margin-top:6px;">Your portfolio this week</div>
+            <div style="color:#9fb3c4;font-size:13px;margin-top:4px;">{period_start} – {period_end}</div>
+          </td></tr>
+          <tr><td style="padding:26px 30px 8px;">
+            <table width="100%" cellpadding="0" cellspacing="0"><tr>
+              <td style="text-align:center;padding:10px;"><div style="font-size:34px;font-weight:700;color:#c0503c;">{stats['message_count']}</div><div style="font-size:12px;color:#8a8577;text-transform:uppercase;letter-spacing:1px;">Messages</div></td>
+              <td style="text-align:center;padding:10px;"><div style="font-size:34px;font-weight:700;color:#c0503c;">{stats['previews']}</div><div style="font-size:12px;color:#8a8577;text-transform:uppercase;letter-spacing:1px;">Résumé previews</div></td>
+              <td style="text-align:center;padding:10px;"><div style="font-size:34px;font-weight:700;color:#c0503c;">{stats['downloads']}</div><div style="font-size:12px;color:#8a8577;text-transform:uppercase;letter-spacing:1px;">Résumé downloads</div></td>
+            </tr></table>
+          </td></tr>
+          <tr><td style="padding:14px 30px;">
+            <div style="font-size:13px;text-transform:uppercase;letter-spacing:1px;color:#8a8577;margin-bottom:6px;">Top résumé days</div>
+            <table width="100%" cellpadding="0" cellspacing="0">{top_rows}</table>
+          </td></tr>
+          <tr><td style="padding:14px 30px 8px;">
+            <div style="font-size:13px;text-transform:uppercase;letter-spacing:1px;color:#8a8577;margin-bottom:6px;">Recent messages</div>
+            <table width="100%" cellpadding="0" cellspacing="0">{msg_rows}</table>
+          </td></tr>
+          <tr><td style="padding:18px 30px;">
+            <a href="https://jacqmagawa.com/api/admin" style="display:inline-block;background:#12283a;color:#f3f1ea;text-decoration:none;padding:10px 22px;border-radius:999px;font-size:14px;">Open dashboard</a>
+          </td></tr>
+          <tr><td style="background:#f7f5ee;padding:14px 30px;color:#8a8577;font-size:12px;">
+            Automated weekly summary from jacqmagawa.com
+          </td></tr>
+        </table>
+      </td></tr>
+    </table>
+    """
+
+
+async def send_weekly_digest(force: bool = False) -> dict:
+    now = datetime.now(timezone.utc)
+    week_key = f"{now.isocalendar().year}-W{now.isocalendar().week:02d}"
+    if not force:
+        already = await db.digest_log.find_one({"week": week_key})
+        if already:
+            logger.info(f"Weekly digest already sent for {week_key}, skipping.")
+            return {"status": "skipped", "week": week_key}
+
+    stats = await compute_digest_stats()
+    params = {
+        "from": f"Jacqueline Magawa Portfolio <{SENDER_EMAIL}>",
+        "to": [RECIPIENT_EMAIL],
+        "subject": f"Your weekly portfolio digest — {stats['message_count']} messages, {stats['resume_total']} résumé views",
+        "html": build_digest_html(stats),
+    }
+    try:
+        await asyncio.to_thread(resend.Emails.send, params)
+        await db.digest_log.update_one(
+            {"week": week_key},
+            {"$set": {"week": week_key, "sent_at": now.isoformat(), "stats": {
+                "messages": stats["message_count"],
+                "previews": stats["previews"],
+                "downloads": stats["downloads"],
+            }}},
+            upsert=True,
+        )
+        logger.info(f"Weekly digest sent for {week_key}.")
+        return {"status": "sent", "week": week_key, "stats": {
+            "messages": stats["message_count"],
+            "previews": stats["previews"],
+            "downloads": stats["downloads"],
+        }}
+    except Exception as e:
+        logger.error(f"Failed to send weekly digest: {e}")
+        return {"status": "error", "detail": str(e)}
+
+
+@api.post("/admin/send-digest")
+async def admin_send_digest(token: str = ""):
+    if not ADMIN_TOKEN or not hmac.compare_digest(token, ADMIN_TOKEN):
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    return await send_weekly_digest(force=True)
+
+
+scheduler = AsyncIOScheduler(timezone="America/New_York")
+
+
+@app.on_event("startup")
+async def start_scheduler():
+    scheduler.add_job(
+        send_weekly_digest,
+        CronTrigger(day_of_week="mon", hour=8, minute=0, timezone="America/New_York"),
+        id="weekly_digest",
+        replace_existing=True,
+    )
+    if not scheduler.running:
+        scheduler.start()
+    logger.info("Weekly digest scheduler started (Mondays 08:00 America/New_York).")
 
 
 app.include_router(api)
