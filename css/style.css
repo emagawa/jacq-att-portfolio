@@ -2383,14 +2383,15 @@ a.c-card:hover {
         }
         .hero-stats {
                 flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
+                align-items: flex-start;
+                justify-content: flex-start;
+                text-align: left;
                 gap: 20px;
                 flex-wrap: nowrap;
         }
         .hero-stats .stat {
                 width: 100%;
+                text-align: left;
         }
         .about-stats {
                 grid-template-columns: 1fr;
