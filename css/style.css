@@ -2381,6 +2381,9 @@ a.c-card:hover {
                 align-items: baseline;
                 gap: 14px;
         }
+        .hero-contact {
+                justify-content: center;
+        }
         .hero-stats {
                 flex-direction: column;
                 align-items: flex-start;
