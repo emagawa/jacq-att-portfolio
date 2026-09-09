@@ -2396,11 +2396,12 @@ a.c-card:hover {
         .about-stats {
                 grid-template-columns: 1fr;
                 gap: 18px;
-                justify-items: center;
-                text-align: center;
+                justify-items: start;
+                text-align: left;
         }
         .about-stat {
                 width: 100%;
+                text-align: left;
         }
         .scroll-cue {
                 display: none;
