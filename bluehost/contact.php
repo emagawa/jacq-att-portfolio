@@ -9,7 +9,7 @@
 // ---- FILL THESE IN (do NOT commit this file to a public repo after adding the key) ----
 $RESEND_API_KEY  = 'PASTE_YOUR_RESEND_API_KEY_HERE';   // from https://resend.com/api-keys
 $SENDER_EMAIL    = 'hello@jacqmagawa.com';             // must be on your verified Resend domain
-$RECIPIENT_EMAIL = 'jacq.magawa@gmail.com';            // where you receive messages
+$RECIPIENT_EMAIL = 'jacqmagawa.ernest@gmail.com';            // where you receive messages
 $AUTOREPLY_REPLY = 'jacqmagawa.ernest@gmail.com';      // reply-to on the visitor's confirmation
 // ---------------------------------------------------------------------------------------
 

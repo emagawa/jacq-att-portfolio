@@ -5,7 +5,7 @@ This is a static portfolio site with a contact-form backend + a private analytic
 ## Resend (email)
 - Provider: Resend (domain jacqmagawa.com verified per user — "done")
 - Sender (SENDER_EMAIL): hello@jacqmagawa.com
-- Recipient (RECIPIENT_EMAIL): jacq.magawa@gmail.com
+- Recipient (RECIPIENT_EMAIL): jacqmagawa.ernest@gmail.com
 - Auto-reply reply-to (AUTOREPLY_REPLY_TO): jacqmagawa.ernest@gmail.com
 - Behavior: on contact submit, a notification email goes to RECIPIENT_EMAIL and a friendly auto-reply goes to the visitor's email.
 

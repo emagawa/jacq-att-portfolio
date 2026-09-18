@@ -127,7 +127,7 @@ Then open it in File Manager (right-click → Edit) and fill in your real values
 ```php
 $RESEND_API_KEY   = 'PASTE_YOUR_RESEND_API_KEY_HERE';   // from resend.com/api-keys
 $SENDER_EMAIL     = 'hello@jacqmagawa.com';
-$RECIPIENT_EMAIL  = 'jacq.magawa@gmail.com';
+$RECIPIENT_EMAIL  = 'jacqmagawa.ernest@gmail.com';
 $AUTOREPLY_REPLY  = 'jacqmagawa.ernest@gmail.com';
 ```
 > 🔒 Because this is server-side PHP, your key is **not** exposed to visitors. Just never paste it into a public GitHub file.

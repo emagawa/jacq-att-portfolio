@@ -85,7 +85,7 @@ Finish and polish the existing static portfolio for Jacqueline Magawa (aviation 
 - Deployed to production; custom domain jacqmagawa.com live and verified (homepage 200, /api/health healthy).
 - Fixed deploy BUILD blocker: created /app/frontend/.env with REACT_APP_BACKEND_URL (Emergent pipeline requires frontend/.env to prepare build context). Frontend calls backend via relative /api paths, so value is domain-agnostic.
 - Meta tags: OG/canonical/twitter all point to https://jacqmagawa.com.
-- Resend: domain jacqmagawa.com verified; SENDER_EMAIL=hello@jacqmagawa.com, RECIPIENT_EMAIL=jacq.magawa@gmail.com. Live contact test succeeded in production. API key ROTATED (re_EpVx...).
+- Resend: domain jacqmagawa.com verified; SENDER_EMAIL=hello@jacqmagawa.com, RECIPIENT_EMAIL=jacqmagawa.ernest@gmail.com. Live contact test succeeded in production. API key ROTATED (re_EpVx...).
 - Auto-reply: friendly confirmation email to the visitor on every submit (from hello@jacqmagawa.com, reply_to jacqmagawa.ernest@gmail.com); best-effort (never blocks main send). build_autoreply_html in server.py.
 - Private analytics dashboard: /admin.html (noindex) + token-protected GET /api/admin/messages and DELETE /api/admin/messages (hmac.compare_digest against ADMIN_TOKEN env). Shows total, last-7-days, per-day, message list. Token in backend/.env ADMIN_TOKEN (see memory/test_credentials.md).
 - Production note: Emergent serves the frontend via its own static host with SPA catch-all to index.html (NOT the custom server.js), so unknown paths return 200+index.html; backend files/.git are not in the frontend container → no secret exposure (verified re_EpVx count = 0 on /backend/.env).

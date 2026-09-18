@@ -28,7 +28,7 @@ MONGO_URL=mongodb://localhost:27017     # or your Atlas connection string
 DB_NAME=jacq_portfolio
 RESEND_API_KEY=your_resend_key
 SENDER_EMAIL=hello@jacqmagawa.com
-RECIPIENT_EMAIL=jacq.magawa@gmail.com
+RECIPIENT_EMAIL=jacqmagawa.ernest@gmail.com
 AUTOREPLY_REPLY_TO=jacqmagawa.ernest@gmail.com
 ADMIN_TOKEN=your_dashboard_token
 ```
@@ -85,7 +85,7 @@ MONGO_URL=mongodb://localhost:27017
 DB_NAME=jacq_portfolio
 RESEND_API_KEY=PASTE_YOUR_RESEND_KEY
 SENDER_EMAIL=hello@jacqmagawa.com
-RECIPIENT_EMAIL=jacq.magawa@gmail.com
+RECIPIENT_EMAIL=jacqmagawa.ernest@gmail.com
 AUTOREPLY_REPLY_TO=jacqmagawa.ernest@gmail.com
 ADMIN_TOKEN=PASTE_A_LONG_RANDOM_TOKEN
 EOF
@@ -217,7 +217,7 @@ the backend runs on Render's free/cheap tier with a free Atlas database.
    DB_NAME     = jacq_portfolio
    RESEND_API_KEY = your key
    SENDER_EMAIL = hello@jacqmagawa.com
-   RECIPIENT_EMAIL = jacq.magawa@gmail.com
+   RECIPIENT_EMAIL = jacqmagawa.ernest@gmail.com
    AUTOREPLY_REPLY_TO = jacqmagawa.ernest@gmail.com
    ADMIN_TOKEN = a long random token
    ```

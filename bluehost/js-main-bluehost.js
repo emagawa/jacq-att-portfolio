@@ -450,12 +450,12 @@ contactForm.addEventListener("submit", async (e) => {
                 } else {
                         cfNote.textContent =
                                 data.detail ||
-                                "Couldn't send right now. Please email jacq.magawa@gmail.com directly.";
+                                "Couldn't send right now. Please email jacqmagawa.ernest@gmail.com directly.";
                         cfNote.className = "form-note err";
                 }
         } catch (err) {
                 cfNote.textContent =
-                        "Network error. Please email jacq.magawa@gmail.com directly.";
+                        "Network error. Please email jacqmagawa.ernest@gmail.com directly.";
                 cfNote.className = "form-note err";
         } finally {
                 cfSubmit.disabled = false;

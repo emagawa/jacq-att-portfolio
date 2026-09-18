@@ -329,7 +329,7 @@ async def contact(payload: ContactRequest, request: Request):
         logger.info(f"Contact email sent: {email}")
     except Exception as e:
         logger.error(f"Failed to send contact email: {e}")
-        raise HTTPException(status_code=502, detail="Could not send your message right now. Please email jacq.magawa@gmail.com directly.")
+        raise HTTPException(status_code=502, detail="Could not send your message right now. Please email jacqmagawa.ernest@gmail.com directly.")
 
     # Friendly auto-reply confirmation to the visitor (best-effort).
     autoreply = {
