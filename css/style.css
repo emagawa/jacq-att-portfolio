@@ -3085,3 +3085,45 @@ h2.checklist-subhead {
                 font-size: 0.85rem;
         }
 }
+
+/* Footer social icons */
+.footer-nav {
+        border-bottom: 0;
+        padding-bottom: 0;
+        margin-bottom: 0;
+}
+.footer-icons {
+        order: -1;
+        flex-basis: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        padding: 6px 0 26px;
+        margin-bottom: 6px;
+        border-bottom: 1px solid rgba(243, 241, 234, 0.12);
+}
+.footer-icons a {
+        width: 42px;
+        height: 42px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 1px solid rgba(243, 241, 234, 0.22);
+        color: rgba(243, 241, 234, 0.8);
+        transition: color 0.3s var(--ease), background-color 0.3s var(--ease), border-color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.footer-icons a:hover {
+        color: #0d1b27;
+        background-color: var(--cream);
+        border-color: var(--cream);
+        transform: translateY(-3px);
+}
+.footer-icons svg {
+        width: 18px;
+        height: 18px;
+}
+.footer-nav,
+.footer-icons {
+        width: 100%;
+}
