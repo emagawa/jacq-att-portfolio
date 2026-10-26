@@ -133,3 +133,11 @@ Finish and polish the existing static portfolio for Jacqueline Magawa (aviation 
 - server.js serves a real 404 status with 404.html. Production (Cloudflare R2) forces a 200 index.html fallback, so main.js sets noindex for unknown paths on home.
 - Production upload is controlled by the build-frontend-artifacts.sh override: it must stage root *.html (except admin.html), robots.txt, sitemap.xml, css, js and assets. This was requested from the deployer.
 - Docs: SEO_BACKLINK_STRATEGY.md (Search Console steps + backlink plan). bluehost/.htaccess and bluehost/js-main-bluehost.js were updated.
+
+## 2026-10 — Detail pages, film pages, YouTube switch, recruiter summary
+- Project detail pages: project-cybersecurity-tabletop-exercise.html, project-java-interpreter.html, project-solarwinds-supply-chain-case-study.html. Content comes from src/data.json "projects" (only facts already on the site). GitHub buttons link to the profile.
+- Film pages: film-<slug>.html (9), each with a native <video> player, VideoObject JSON-LD and video:video sitemap entries, plus "More training films" links and a pager.
+- YouTube switch: set "youtube": "<videoId>" on a film in src/data.json and rebuild. The card and page then use a youtube-nocookie embed, and the schema/sitemap use the embed URL.
+- Recruiter summary: recruiter-summary.html, with Print/Save as PDF (fits 1 Letter page) and résumé download. It's linked from the nav CTA (>1200px), the mobile menu (<=1024px) and the footer on every page.
+- Nav: nowrap plus compression tiers for 1025–1440px. Sitemap now has 22 URLs. Tested: iteration_11 (all passed); the nav wrap, print length and player height were fixed afterwards.
+- Backlog: add real YouTube IDs once uploaded; give projects real repo links when available.

@@ -74,7 +74,7 @@ r = requests.get(f"{BASE}/robots.txt"); print("\nrobots:", r.status_code, r.head
 if 'Sitemap: https://jacqmagawa.com/sitemap.xml' not in r.text or 'text/plain' not in r.headers.get('content-type', ''): fails.append("robots.txt bad")
 r = requests.get(f"{BASE}/sitemap.xml"); locs = re.findall(r'<loc>(.*?)</loc>', r.text)
 print("sitemap:", r.status_code, r.headers.get('content-type'), locs)
-if len(locs) != 9: fails.append(f"sitemap has {len(locs)} urls")
+if len(locs) != 22: fails.append(f"sitemap has {len(locs)} urls")
 for l in locs:
     s = requests.get(l.replace('https://jacqmagawa.com', BASE)).status_code
     if s != 200: fails.append(f"sitemap url {l} -> {s}")

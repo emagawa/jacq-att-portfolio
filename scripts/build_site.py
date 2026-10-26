@@ -243,6 +243,7 @@ def nav(active):
         cls = "nav-link active" if key == active else "nav-link"
         cur = ' aria-current="page"' if key == active else ""
         links.append(f'<a href="{href}" class="{cls}"{cur} data-testid="nav-link-{key}">{label}</a>')
+    links.append(f'<a href="/{RECRUITER_FILE}" class="nav-link nav-link--recruiter" data-testid="nav-link-recruiter">Recruiter view</a>')
     joined = "\n                        ".join(links)
     return f"""<header class="site-nav" id="siteNav">
         <div class="container">
