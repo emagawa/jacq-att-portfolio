@@ -6,63 +6,72 @@
       "title": "First Flight — Brookhaven Airport",
       "meta": "16 May 2015 · Shirley, NY",
       "desc": "My very first flight, front seat, with a certified flight instructor.",
-      "duration": "PT17M17S"
+      "duration": "PT17M17S",
+      "youtube": ""
     },
     {
       "slug": "first-taxi-brookhaven-2015",
       "title": "First Taxi & Takeoff Roll",
       "meta": "17 May 2015 · Brookhaven Airport",
       "desc": "Ground handling and takeoff-roll practice the very next day.",
-      "duration": "PT1M10S"
+      "duration": "PT1M10S",
+      "youtube": ""
     },
     {
       "slug": "taxi-training-republic-2015",
       "title": "Taxi & Ground Training",
       "meta": "28 Nov 2015 · Republic Airport, Farmingdale",
       "desc": "Continued ground training with the Brookhaven Aviation Flying Club.",
-      "duration": "PT2M3S"
+      "duration": "PT2M3S",
+      "youtube": ""
     },
     {
       "slug": "midair-training-republic-2019",
       "title": "Mid-Air Training",
       "meta": "17 Aug 2019 · Republic Airport, Farmingdale",
       "desc": "Hands-on instrument and control work, four years into training.",
-      "duration": "PT5M31S"
+      "duration": "PT5M31S",
+      "youtube": ""
     },
     {
       "slug": "takeoff-training-republic-2019",
       "title": "Takeoff Highlight",
       "meta": "12 Aug 2019 · Republic Airport, Farmingdale",
       "desc": "The highlight reel — lineup, takeoff roll, liftoff, and the climb-out over Farmingdale.",
-      "duration": "PT2M30S"
+      "duration": "PT2M30S",
+      "youtube": ""
     },
     {
       "slug": "farmingdale-edgartown-2019",
       "title": "Cross-Country: Farmingdale → Edgartown",
       "meta": "31 Aug 2019 · with Instructor Alfred James",
       "desc": "A cross-country training flight out to Martha's Vineyard.",
-      "duration": "PT6M48S"
+      "duration": "PT6M48S",
+      "youtube": ""
     },
     {
       "slug": "midair-training-cruising-2019",
       "title": "Mid-Air Training & Cruising",
       "meta": "Republic Airport · Farmingdale, NY",
       "desc": "Instrument work and cruising, mid-flight.",
-      "duration": "PT3M1S"
+      "duration": "PT3M1S",
+      "youtube": ""
     },
     {
       "slug": "takeoff-farmingdale-2019",
       "title": "Taking off at Farmingdale Airport",
       "meta": "Republic Airport · Farmingdale, NY",
       "desc": "Lineup, takeoff roll, and liftoff out of Farmingdale.",
-      "duration": "PT4M18S"
+      "duration": "PT4M18S",
+      "youtube": ""
     },
     {
       "slug": "cross-country-training-2019",
       "title": "Cross-Country: Mid-Air Training",
       "meta": "with Instructor Alfred James",
       "desc": "A long cross-country navigation flight — tracking waypoints and working the panel en route.",
-      "duration": "PT5M27S"
+      "duration": "PT5M27S",
+      "youtube": ""
     }
   ],
   "gallery": [
@@ -169,16 +178,124 @@
   ],
   "projects": [
     {
+      "slug": "project-cybersecurity-tabletop-exercise",
       "name": "Cybersecurity Tabletop Exercise (ROMERO Simulation)",
-      "desc": "Evaluated ransomware, phishing, credential-leak and supply-chain threats and built risk-based defense strategies within a fixed budget."
+      "short": "Tabletop Exercise",
+      "date": "Apr 2026",
+      "dateISO": "2026-04",
+      "card": "Evaluated real-world cyber threats — ransomware, phishing, credential leaks, and supply-chain attacks — and developed risk-based defense strategies within a fixed budget, prioritizing controls like access management and network segmentation.",
+      "desc": "Evaluated ransomware, phishing, credential-leak and supply-chain threats and built risk-based defense strategies within a fixed budget.",
+      "title": "Cybersecurity Tabletop Exercise | Jacqueline Magawa",
+      "metaDesc": "Jacqueline Magawa's cybersecurity tabletop exercise: ransomware, phishing, credential leaks and supply-chain attacks, defended on a fixed budget.",
+      "focus": "Cyber risk & defense strategy",
+      "threatsTitle": "Threats evaluated",
+      "threats": [
+        "Ransomware",
+        "Phishing",
+        "Credential leaks",
+        "Supply-chain attacks"
+      ],
+      "did": [
+        "Evaluated four real-world threat types in a simulated organization: ransomware, phishing, credential leaks, and supply-chain attacks.",
+        "Weighed each threat by risk to decide where defenses matter most.",
+        "Built defense strategies that had to fit within a fixed budget.",
+        "Prioritized high-impact controls such as access management and network segmentation."
+      ],
+      "tags": [
+        "Risk Assessment",
+        "Incident Response",
+        "Budget Strategy"
+      ],
+      "related": [
+        [
+          "/skills.html",
+          "Cybersecurity fundamentals on the skills checklist"
+        ],
+        [
+          "/project-solarwinds-supply-chain-case-study.html",
+          "SolarWinds supply-chain attack case study"
+        ]
+      ]
     },
     {
+      "slug": "project-java-interpreter",
       "name": "Interpreter for a Custom Programming Language",
-      "desc": "A Java interpreter with a lexer, recursive descent parser and AST evaluator supporting variables, control flow and functions."
+      "short": "Java Interpreter",
+      "date": "Apr 2026",
+      "dateISO": "2026-04",
+      "card": "Built a fully functional interpreter in Java — lexer, recursive descent parser, and AST evaluator — supporting variables, control flow, and function calls, with a custom grammar designed from scratch.",
+      "desc": "A Java interpreter with a lexer, recursive descent parser and AST evaluator supporting variables, control flow and functions.",
+      "title": "Java Interpreter for a Custom Language | Jacqueline Magawa",
+      "metaDesc": "Jacqueline Magawa built a Java interpreter for a custom language: lexer, recursive descent parser and AST evaluator with variables, control flow and functions.",
+      "focus": "Programming language design",
+      "threatsTitle": "Language features",
+      "threats": [
+        "Variables",
+        "Control flow",
+        "Function calls",
+        "Custom grammar"
+      ],
+      "did": [
+        "Designed a custom grammar for a new programming language from scratch.",
+        "Wrote a lexer that turns source code into tokens.",
+        "Built a recursive descent parser that turns tokens into an abstract syntax tree (AST).",
+        "Implemented an AST evaluator that runs programs, with variables, control flow, and function calls."
+      ],
+      "tags": [
+        "Java",
+        "Parsing",
+        "Language Design"
+      ],
+      "related": [
+        [
+          "/skills.html",
+          "Languages & tools on the skills checklist"
+        ],
+        [
+          "/education.html",
+          "Computer Science coursework at University at Albany"
+        ]
+      ]
     },
     {
+      "slug": "project-solarwinds-supply-chain-case-study",
       "name": "SolarWinds Supply Chain Attack — Case Study",
-      "desc": "Analysis of APT29's 2020 supply-chain compromise using MITRE ATT&CK, the CIA Triad and defense-in-depth."
+      "short": "SolarWinds Case Study",
+      "date": "Apr 2026",
+      "dateISO": "2026-04",
+      "card": "Analyzed APT29's 2020 supply-chain compromise using the MITRE ATT&CK framework — mapping Golden SAML attacks, lateral movement, and C2 evasion across 18,000+ affected organizations through the CIA Triad and defense-in-depth lenses.",
+      "desc": "Analysis of APT29's 2020 supply-chain compromise using MITRE ATT&CK, the CIA Triad and defense-in-depth.",
+      "title": "SolarWinds Attack Case Study | Jacqueline Magawa",
+      "metaDesc": "Jacqueline Magawa's case study of APT29's 2020 SolarWinds supply-chain attack, mapped with MITRE ATT&CK: Golden SAML, lateral movement and C2 evasion.",
+      "focus": "Threat analysis",
+      "threatsTitle": "Techniques mapped",
+      "threats": [
+        "Golden SAML attacks",
+        "Lateral movement",
+        "Command-and-control (C2) evasion",
+        "18,000+ affected organizations"
+      ],
+      "did": [
+        "Studied APT29's 2020 compromise of the SolarWinds software supply chain.",
+        "Mapped the attackers' techniques to the MITRE ATT&CK framework, including Golden SAML attacks, lateral movement, and C2 evasion.",
+        "Assessed the impact across more than 18,000 affected organizations.",
+        "Evaluated the breach through the CIA Triad (confidentiality, integrity, availability) and defense-in-depth."
+      ],
+      "tags": [
+        "MITRE ATT&CK",
+        "Threat Analysis",
+        "Case Study"
+      ],
+      "related": [
+        [
+          "/project-cybersecurity-tabletop-exercise.html",
+          "Cybersecurity tabletop exercise (ROMERO simulation)"
+        ],
+        [
+          "/skills.html",
+          "Cybersecurity fundamentals on the skills checklist"
+        ]
+      ]
     }
   ]
 }

@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+        <head>
+                <!-- Google Tag Manager -->
+                <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-NPG82L6T');</script>
+                <!-- End Google Tag Manager -->
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>SolarWinds Attack Case Study | Jacqueline Magawa</title>
+                <meta name="description" content="Jacqueline Magawa&#x27;s case study of APT29&#x27;s 2020 SolarWinds supply-chain attack, mapped with MITRE ATT&amp;CK: Golden SAML, lateral movement and C2 evasion." />
+                <meta name="robots" content="index, follow, max-image-preview:large" />
+                <meta name="theme-color" content="#13293b" />
+                <meta name="author" content="Jacqueline Magawa" />
+                <link rel="canonical" href="https://jacqmagawa.com/project-solarwinds-supply-chain-case-study.html" />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://jacqmagawa.com/project-solarwinds-supply-chain-case-study.html" />
+                <meta property="og:title" content="SolarWinds Attack Case Study | Jacqueline Magawa" />
+                <meta property="og:description" content="Jacqueline Magawa&#x27;s case study of APT29&#x27;s 2020 SolarWinds supply-chain attack, mapped with MITRE ATT&amp;CK: Golden SAML, lateral movement and C2 evasion." />
+                <meta property="og:image" content="https://jacqmagawa.com/assets/img/og-image.jpg" />
+                <meta property="og:image:type" content="image/jpeg" />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+                <meta property="og:image:alt" content="Jacqueline Magawa, Aviation Enthusiast and Cybersecurity / CS Student" />
+                <meta property="og:site_name" content="Jacqueline Magawa" />
+                <meta property="og:locale" content="en_US" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="SolarWinds Attack Case Study | Jacqueline Magawa" />
+                <meta name="twitter:description" content="Jacqueline Magawa&#x27;s case study of APT29&#x27;s 2020 SolarWinds supply-chain attack, mapped with MITRE ATT&amp;CK: Golden SAML, lateral movement and C2 evasion." />
+                <meta name="twitter:image" content="https://jacqmagawa.com/assets/img/og-image.jpg" />
+                <meta name="twitter:image:alt" content="Jacqueline Magawa, Aviation Enthusiast and Cybersecurity / CS Student" />
+                <link rel="icon" href="/assets/img/favicon.png" type="image/png" />
+                <link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png" />
+                <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+                <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+                <link rel="stylesheet" href="/css/style.css?v=bfdf0070" />
+                <script src="/js/main.js?v=a8ae47e0" defer></script>
+                <script type="application/ld+json">
+        {
+         "@context": "https://schema.org",
+         "@graph": [
+          {
+           "@type": "Person",
+           "@id": "https://jacqmagawa.com/#person",
+           "name": "Jacqueline Magawa",
+           "url": "https://jacqmagawa.com/",
+           "image": "https://jacqmagawa.com/assets/img/portrait.jpg",
+           "email": "mailto:jacqmagawa.ernest@gmail.com",
+           "jobTitle": "Computer Science & Cybersecurity Student",
+           "description": "Aviation Management graduate and Computer Science / Cybersecurity student at University at Albany. Flight log, projects, credentials and contact.",
+           "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Albany",
+            "addressRegion": "NY",
+            "addressCountry": "US"
+           },
+           "affiliation": {
+            "@type": "CollegeOrUniversity",
+            "name": "University at Albany, SUNY",
+            "url": "https://www.albany.edu/"
+           },
+           "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "Dutchess Community College",
+            "url": "https://www.sunydutchess.edu/"
+           },
+           "knowsLanguage": [
+            "English",
+            "Swahili"
+           ],
+           "knowsAbout": [
+            "Cybersecurity",
+            "Computer Science",
+            "Aviation Management",
+            "Java",
+            "C",
+            "Linux",
+            "Computer Networking",
+            "IT Support",
+            "Threat Modeling",
+            "MITRE ATT&CK"
+           ],
+           "hasCredential": [
+            {
+             "@type": "EducationalOccupationalCredential",
+             "name": "FAA Student Pilot Certificate",
+             "credentialCategory": "certificate"
+            },
+            {
+             "@type": "EducationalOccupationalCredential",
+             "name": "Associate in Science, Aviation Management",
+             "credentialCategory": "degree"
+            }
+           ],
+           "sameAs": [
+            "https://www.linkedin.com/in/jacquelinem25/",
+            "https://github.com/Jackie-legit"
+           ]
+          },
+          {
+           "@type": "BreadcrumbList",
+           "@id": "https://jacqmagawa.com/project-solarwinds-supply-chain-case-study.html#breadcrumb",
+           "itemListElement": [
+            {
+             "@type": "ListItem",
+             "position": 1,
+             "name": "Home",
+             "item": "https://jacqmagawa.com/"
+            },
+            {
+             "@type": "ListItem",
+             "position": 2,
+             "name": "Projects",
+             "item": "https://jacqmagawa.com/projects.html"
+            },
+            {
+             "@type": "ListItem",
+             "position": 3,
+             "name": "SolarWinds Case Study",
+             "item": "https://jacqmagawa.com/project-solarwinds-supply-chain-case-study.html"
+            }
+           ]
+          },
+          {
+           "@type": "WebPage",
+           "@id": "https://jacqmagawa.com/project-solarwinds-supply-chain-case-study.html#webpage",
+           "url": "https://jacqmagawa.com/project-solarwinds-supply-chain-case-study.html",
+           "name": "SolarWinds Attack Case Study | Jacqueline Magawa",
+           "description": "Jacqueline Magawa's case study of APT29's 2020 SolarWinds supply-chain attack, mapped with MITRE ATT&CK: Golden SAML, lateral movement and C2 evasion.",
+           "isPartOf": {
+            "@id": "https://jacqmagawa.com/#website"
+           },
+           "inLanguage": "en",
+           "primaryImageOfPage": "https://jacqmagawa.com/assets/img/og-image.jpg",
+           "breadcrumb": {
+            "@id": "https://jacqmagawa.com/project-solarwinds-supply-chain-case-study.html#breadcrumb"
+           },
+           "mainEntity": {
+            "@type": "CreativeWork",
+            "@id": "https://jacqmagawa.com/project-solarwinds-supply-chain-case-study.html#project",
+            "name": "SolarWinds Supply Chain Attack — Case Study",
+            "description": "Analyzed APT29's 2020 supply-chain compromise using the MITRE ATT&CK framework — mapping Golden SAML attacks, lateral movement, and C2 evasion across 18,000+ affected organizations through the CIA Triad and defense-in-depth lenses.",
+            "dateCreated": "2026-04",
+            "keywords": "MITRE ATT&CK, Threat Analysis, Case Study",
+            "author": {
+             "@id": "https://jacqmagawa.com/#person"
+            }
+           }
+          }
+         ]
+        }
+                </script>
+        </head>
+        <body data-page="projects">
+                <!-- Google Tag Manager (noscript) -->
+                <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPG82L6T"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+                <!-- End Google Tag Manager (noscript) -->
+                <a class="skip-link" href="#main">Skip to content</a>
+                <header class="site-nav" id="siteNav">
+                        <div class="container">
+                                <a href="/" class="brand" aria-label="Jacqueline Magawa, home" data-testid="nav-brand-link">
+                                        <picture>
+                                                <source type="image/webp" srcset="/assets/img/logo-magawa-nav.webp" />
+                                                <img src="/assets/img/logo-magawa-nav.png" width="120" height="134" alt="Jacqueline Magawa logo" />
+                                        </picture>
+                                        <span class="brand-name">Jacqueline</span>
+                                </a>
+                                <nav class="nav-links" id="navLinks" aria-label="Main">
+                                        <a href="/" class="nav-link" data-testid="nav-link-home">Home</a>
+                                        <a href="/about.html" class="nav-link" data-testid="nav-link-about">About</a>
+                                        <a href="/flight-log.html" class="nav-link" data-testid="nav-link-log">Flight Log</a>
+                                        <a href="/education.html" class="nav-link" data-testid="nav-link-education">Education</a>
+                                        <a href="/skills.html" class="nav-link" data-testid="nav-link-skills">Checklist</a>
+                                        <a href="/projects.html" class="nav-link active" aria-current="page" data-testid="nav-link-projects">Projects</a>
+                                        <a href="/training-films.html" class="nav-link" data-testid="nav-link-films">Training Films</a>
+                                        <a href="/gallery.html" class="nav-link" data-testid="nav-link-gallery">Gallery</a>
+                                        <a href="/contact.html" class="nav-link" data-testid="nav-link-contact">Contact</a>
+                                </nav>
+                                <a href="/recruiter-summary.html" class="nav-cta" data-testid="nav-recruiter-cta">Recruiter view</a>
+                                <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false" data-testid="nav-toggle-btn">
+                                        <span></span><span></span><span></span>
+                                </button>
+                        </div>
+                </header>
+                <main id="main">
+                <article class="section page-first on-paper detail" id="project" data-testid="project-detail">
+                        <div class="container">
+                                <nav class="breadcrumb reveal" aria-label="Breadcrumb" data-testid="breadcrumb">
+                                        <a href="/" data-testid="breadcrumb-home">Home</a><span aria-hidden="true">/</span><a href="/projects.html" data-testid="breadcrumb-parent">Projects</a><span aria-hidden="true">/</span><span aria-current="page">SolarWinds Case Study</span>
+                                </nav>
+                                <header class="sec-head sec-head--split reveal">
+                                        <span class="sec-index">03</span>
+                                        <h1>SolarWinds Supply Chain Attack — Case Study</h1>
+                                        <span class="sec-kicker">Personal Project · Apr 2026</span>
+                                </header>
+                                <div class="detail-grid">
+                                        <div class="detail-copy reveal">
+                                                <p class="lead">Analyzed APT29&#x27;s 2020 supply-chain compromise using the MITRE ATT&amp;CK framework — mapping Golden SAML attacks, lateral movement, and C2 evasion across 18,000+ affected organizations through the CIA Triad and defense-in-depth lenses.</p>
+                                                <h2>What I did</h2>
+                                                <ul class="detail-list">
+                                                        <li>Studied APT29&#x27;s 2020 compromise of the SolarWinds software supply chain.</li>
+                                                        <li>Mapped the attackers&#x27; techniques to the MITRE ATT&amp;CK framework, including Golden SAML attacks, lateral movement, and C2 evasion.</li>
+                                                        <li>Assessed the impact across more than 18,000 affected organizations.</li>
+                                                        <li>Evaluated the breach through the CIA Triad (confidentiality, integrity, availability) and defense-in-depth.</li>
+                                                </ul>
+                                                <h2>Techniques mapped</h2>
+                                                <div class="tag-row"><span class="tag-chip">Golden SAML attacks</span><span class="tag-chip">Lateral movement</span><span class="tag-chip">Command-and-control (C2) evasion</span><span class="tag-chip">18,000+ affected organizations</span></div>
+                                                <h2>Skills applied</h2>
+                                                <div class="tag-row"><span class="tag-chip">MITRE ATT&amp;CK</span><span class="tag-chip">Threat Analysis</span><span class="tag-chip">Case Study</span></div>
+                                                <div class="detail-actions">
+                                                        <a href="https://github.com/Jackie-legit" target="_blank" rel="noopener" class="btn btn-ghost" data-testid="project-github-btn">View GitHub Profile</a>
+                                                        <a href="/contact.html" class="btn btn-rust" data-testid="project-contact-btn">Ask me about this project</a>
+                                                </div>
+                                        </div>
+                                        <aside class="about-info reveal" aria-label="Project facts">
+                                                <div class="about-info-row"><span class="k">Type</span><span class="v">Personal project</span></div>
+                                                <div class="about-info-row"><span class="k">Date</span><span class="v">Apr 2026</span></div>
+                                                <div class="about-info-row"><span class="k">Focus</span><span class="v">Threat analysis</span></div>
+                                                <div class="about-info-row"><span class="k">Skills</span><span class="v">MITRE ATT&amp;CK · Threat Analysis · Case Study</span></div>
+                                                <h2 class="detail-aside-title">Related</h2>
+                                                <ul class="detail-related">
+                                                        <li><a href="/project-cybersecurity-tabletop-exercise.html">Cybersecurity tabletop exercise (ROMERO simulation)</a></li>
+                                                        <li><a href="/skills.html">Cybersecurity fundamentals on the skills checklist</a></li>
+                                                        <li><a href="/projects.html">All projects</a></li>
+                                                </ul>
+                                        </aside>
+                                </div>
+                        </div>
+                </article>
+                <nav class="page-pager" aria-label="More pages" data-testid="page-pager">
+                        <div class="container page-pager-inner">
+                                <a href="/project-java-interpreter.html" class="pager-link pager-prev" data-testid="pager-prev"><span class="pager-k">Previous</span><span class="pager-v">Java Interpreter</span></a>
+                                <a href="/project-cybersecurity-tabletop-exercise.html" class="pager-link pager-next" data-testid="pager-next"><span class="pager-k">Next</span><span class="pager-v">Tabletop Exercise</span></a>
+                        </div>
+                </nav>
+                </main>
+                <footer class="site-footer">
+                        <div class="container footer-inner">
+                                <span class="footer-brand">
+                                        <span>© <span id="year">2026</span> Jacqueline Magawa. All rights reserved.</span>
+                                </span>
+                                <nav class="footer-nav" aria-label="Footer">
+                                        <a href="/about.html" data-testid="footer-link-about">About</a>
+                                        <a href="/flight-log.html" data-testid="footer-link-log">Flight Log</a>
+                                        <a href="/education.html" data-testid="footer-link-education">Education</a>
+                                        <a href="/skills.html" data-testid="footer-link-skills">Checklist</a>
+                                        <a href="/projects.html" data-testid="footer-link-projects">Projects</a>
+                                        <a href="/training-films.html" data-testid="footer-link-films">Training Films</a>
+                                        <a href="/gallery.html" data-testid="footer-link-gallery">Gallery</a>
+                                        <a href="/contact.html" data-testid="footer-link-contact">Contact</a>
+                                        <a href="/recruiter-summary.html" data-testid="footer-link-recruiter">Recruiter summary</a>
+                                </nav>
+                                <div class="footer-socials">
+                                        <span class="footer-tagline">Jacqueline Magawa — Computer Science, minor in Cybersecurity, Class of 2027</span>
+                                </div>
+                        </div>
+                </footer>
+
+                <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+                <button type="button" id="backToTop" class="back-to-top" aria-label="Back to top" title="Back to top" data-testid="back-to-top">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6" /></svg>
+                </button>
+        </body>
+</html>

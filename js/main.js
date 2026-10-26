@@ -100,6 +100,24 @@ function onActivate(el, handler) {
 
 /* ---------- Training Films (cards are pre-rendered in HTML) ---------- */
 document.querySelectorAll(".film-media[data-slug]").forEach((media) => {
+        const youtubeId = media.dataset.youtube;
+        if (youtubeId) {
+                onActivate(media, () => {
+                        if (media.classList.contains("is-playing")) return;
+                        const iframe = document.createElement("iframe");
+                        iframe.src = `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0`;
+                        iframe.className = "film-fullvideo";
+                        iframe.title = media.getAttribute("aria-label");
+                        iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+                        iframe.allowFullscreen = true;
+                        media.querySelector(".film-play")?.remove();
+                        media.classList.add("is-playing");
+                        media.removeAttribute("role");
+                        media.removeAttribute("tabindex");
+                        media.appendChild(iframe);
+                });
+                return;
+        }
         const src = `/assets/video/${media.dataset.slug}.mp4`;
         let preview = null;
 
@@ -191,6 +209,8 @@ if (lightbox && galleryItems.length) {
 }
 
 /* ---------- Résumé preview + tracking ---------- */
+document.querySelectorAll("[data-print]").forEach((btn) => btn.addEventListener("click", () => window.print()));
+
 const RESUME_PDF = "/assets/resume-jacqueline-magawa.pdf";
 
 function trackResume(event) {

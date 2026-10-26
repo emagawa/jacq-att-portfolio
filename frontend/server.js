@@ -21,8 +21,8 @@ const CACHE_ASSETS = "public, max-age=2592000";
 
 // Only these paths are publicly served. Everything else (backend/, .env,
 // .git/, source, config) is rejected so secrets and code are never exposed.
-const PAGES = ["index", "about", "flight-log", "education", "skills", "projects", "training-films", "gallery", "contact", "404", "admin", "googlee2baf0cc1b65fae8"];
-const PUBLIC_FILES = new Set([...PAGES.map((p) => `/${p}.html`), "/sitemap.xml", "/robots.txt", "/favicon.ico"]);
+const PUBLIC_FILES = new Set(["/sitemap.xml", "/robots.txt", "/favicon.ico"]);
+const PUBLIC_PAGE = /^[a-z0-9-]+\.html$/;
 const PUBLIC_DIRS = ["assets/", "css/", "js/"];
 
 const SECURITY_HEADERS = {
@@ -34,7 +34,7 @@ const SECURITY_HEADERS = {
 // Decide whether a repo-root-relative path is allowed to be served publicly.
 function isPublicPath(resolved) {
   const rel = path.relative(ROOT, resolved).split(path.sep).join("/");
-  if (PUBLIC_FILES.has("/" + rel)) return true;
+  if (PUBLIC_FILES.has("/" + rel) || PUBLIC_PAGE.test(rel)) return true;
   return PUBLIC_DIRS.some((dir) => rel.startsWith(dir));
 }
 

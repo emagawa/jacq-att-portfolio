@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
     <loc>https://jacqmagawa.com/</loc>
     <lastmod>2026-10-26</lastmod>
@@ -65,5 +65,133 @@
     <loc>https://jacqmagawa.com/contact.html</loc>
     <lastmod>2026-10-26</lastmod>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jacqmagawa.com/project-cybersecurity-tabletop-exercise.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jacqmagawa.com/project-java-interpreter.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jacqmagawa.com/project-solarwinds-supply-chain-case-study.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jacqmagawa.com/film-first-flight-brookhaven-2015.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <priority>0.6</priority>
+    <video:video>
+      <video:thumbnail_loc>https://jacqmagawa.com/assets/video/posters/first-flight-brookhaven-2015.jpg</video:thumbnail_loc>
+      <video:title>First Flight — Brookhaven Airport</video:title>
+      <video:description>My very first flight, front seat, with a certified flight instructor. 16 May 2015 · Shirley, NY</video:description>
+      <video:content_loc>https://jacqmagawa.com/assets/video/first-flight-brookhaven-2015.mp4</video:content_loc>
+      <video:duration>1037</video:duration>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://jacqmagawa.com/film-first-taxi-brookhaven-2015.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <priority>0.6</priority>
+    <video:video>
+      <video:thumbnail_loc>https://jacqmagawa.com/assets/video/posters/first-taxi-brookhaven-2015.jpg</video:thumbnail_loc>
+      <video:title>First Taxi &amp; Takeoff Roll</video:title>
+      <video:description>Ground handling and takeoff-roll practice the very next day. 17 May 2015 · Brookhaven Airport</video:description>
+      <video:content_loc>https://jacqmagawa.com/assets/video/first-taxi-brookhaven-2015.mp4</video:content_loc>
+      <video:duration>70</video:duration>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://jacqmagawa.com/film-taxi-training-republic-2015.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <priority>0.6</priority>
+    <video:video>
+      <video:thumbnail_loc>https://jacqmagawa.com/assets/video/posters/taxi-training-republic-2015.jpg</video:thumbnail_loc>
+      <video:title>Taxi &amp; Ground Training</video:title>
+      <video:description>Continued ground training with the Brookhaven Aviation Flying Club. 28 Nov 2015 · Republic Airport, Farmingdale</video:description>
+      <video:content_loc>https://jacqmagawa.com/assets/video/taxi-training-republic-2015.mp4</video:content_loc>
+      <video:duration>123</video:duration>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://jacqmagawa.com/film-midair-training-republic-2019.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <priority>0.6</priority>
+    <video:video>
+      <video:thumbnail_loc>https://jacqmagawa.com/assets/video/posters/midair-training-republic-2019.jpg</video:thumbnail_loc>
+      <video:title>Mid-Air Training</video:title>
+      <video:description>Hands-on instrument and control work, four years into training. 17 Aug 2019 · Republic Airport, Farmingdale</video:description>
+      <video:content_loc>https://jacqmagawa.com/assets/video/midair-training-republic-2019.mp4</video:content_loc>
+      <video:duration>331</video:duration>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://jacqmagawa.com/film-takeoff-training-republic-2019.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <priority>0.6</priority>
+    <video:video>
+      <video:thumbnail_loc>https://jacqmagawa.com/assets/video/posters/takeoff-training-republic-2019.jpg</video:thumbnail_loc>
+      <video:title>Takeoff Highlight</video:title>
+      <video:description>The highlight reel — lineup, takeoff roll, liftoff, and the climb-out over Farmingdale. 12 Aug 2019 · Republic Airport, Farmingdale</video:description>
+      <video:content_loc>https://jacqmagawa.com/assets/video/takeoff-training-republic-2019.mp4</video:content_loc>
+      <video:duration>150</video:duration>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://jacqmagawa.com/film-farmingdale-edgartown-2019.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <priority>0.6</priority>
+    <video:video>
+      <video:thumbnail_loc>https://jacqmagawa.com/assets/video/posters/farmingdale-edgartown-2019.jpg</video:thumbnail_loc>
+      <video:title>Cross-Country: Farmingdale → Edgartown</video:title>
+      <video:description>A cross-country training flight out to Martha&#x27;s Vineyard. 31 Aug 2019 · with Instructor Alfred James</video:description>
+      <video:content_loc>https://jacqmagawa.com/assets/video/farmingdale-edgartown-2019.mp4</video:content_loc>
+      <video:duration>408</video:duration>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://jacqmagawa.com/film-midair-training-cruising-2019.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <priority>0.6</priority>
+    <video:video>
+      <video:thumbnail_loc>https://jacqmagawa.com/assets/video/posters/midair-training-cruising-2019.jpg</video:thumbnail_loc>
+      <video:title>Mid-Air Training &amp; Cruising</video:title>
+      <video:description>Instrument work and cruising, mid-flight. Republic Airport · Farmingdale, NY</video:description>
+      <video:content_loc>https://jacqmagawa.com/assets/video/midair-training-cruising-2019.mp4</video:content_loc>
+      <video:duration>181</video:duration>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://jacqmagawa.com/film-takeoff-farmingdale-2019.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <priority>0.6</priority>
+    <video:video>
+      <video:thumbnail_loc>https://jacqmagawa.com/assets/video/posters/takeoff-farmingdale-2019.jpg</video:thumbnail_loc>
+      <video:title>Taking off at Farmingdale Airport</video:title>
+      <video:description>Lineup, takeoff roll, and liftoff out of Farmingdale. Republic Airport · Farmingdale, NY</video:description>
+      <video:content_loc>https://jacqmagawa.com/assets/video/takeoff-farmingdale-2019.mp4</video:content_loc>
+      <video:duration>258</video:duration>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://jacqmagawa.com/film-cross-country-training-2019.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <priority>0.6</priority>
+    <video:video>
+      <video:thumbnail_loc>https://jacqmagawa.com/assets/video/posters/cross-country-training-2019.jpg</video:thumbnail_loc>
+      <video:title>Cross-Country: Mid-Air Training</video:title>
+      <video:description>A long cross-country navigation flight — tracking waypoints and working the panel en route. with Instructor Alfred James</video:description>
+      <video:content_loc>https://jacqmagawa.com/assets/video/cross-country-training-2019.mp4</video:content_loc>
+      <video:duration>327</video:duration>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://jacqmagawa.com/recruiter-summary.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <priority>0.7</priority>
   </url>
 </urlset>
