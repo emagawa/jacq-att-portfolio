@@ -2432,3 +2432,264 @@ a.c-card:hover {
                 text-align: center;
         }
 }
+
+/* ============ MULTI-PAGE / SEO ADDITIONS ============ */
+.skip-link {
+        position: absolute;
+        left: 16px;
+        top: -60px;
+        z-index: 200;
+        background: var(--ink);
+        color: var(--cream);
+        padding: 10px 18px;
+        border-radius: 999px;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        transition: top 0.25s var(--ease);
+}
+.skip-link:focus {
+        top: 12px;
+}
+
+.brand picture,
+.portrait-frame picture {
+        display: block;
+}
+.portrait-frame picture {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+}
+
+.section.page-first {
+        padding-top: 150px;
+        min-height: 70vh;
+}
+
+.sec-head h1 {
+        grid-column: 2;
+        font-size: clamp(2.2rem, 5vw, 3.6rem);
+}
+
+.breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 22px;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted);
+}
+.breadcrumb a {
+        color: var(--ink-soft);
+        transition: color 0.3s var(--ease);
+}
+.breadcrumb a:hover {
+        color: var(--rust);
+}
+.breadcrumb [aria-current] {
+        color: var(--rust);
+}
+
+/* Heading levels re-mapped for a clean hierarchy; visuals unchanged */
+.tl-main h2 {
+        font-size: clamp(1.35rem, 2.4vw, 1.72rem);
+        font-weight: 400;
+        letter-spacing: -0.01em;
+        line-height: 1.15;
+        transition: transform 0.5s var(--ease);
+}
+.tl-item:hover .tl-main h2 {
+        transform: translateX(5px);
+}
+.edu-block h2 {
+        font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+        font-weight: 400;
+        line-height: 1.15;
+}
+.cert-card h2 {
+        font-size: 1.12rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+        letter-spacing: -0.01em;
+}
+h2.checklist-subhead {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        font-weight: 500;
+        line-height: 1.65;
+        letter-spacing: 0.18em;
+        color: var(--rust);
+}
+.check-item h3 {
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+}
+.project-card h2 {
+        font-size: 1.18rem;
+        margin-bottom: 12px;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+}
+.film-body h2 {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+        letter-spacing: -0.01em;
+}
+.gallery-item {
+        margin: 0;
+}
+.film-media:focus-visible,
+.gallery-item:focus-visible {
+        outline: 2px solid var(--rust);
+        outline-offset: 3px;
+}
+
+/* Home: explore grid */
+.explore-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+}
+.explore-card {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        background: var(--cream);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 28px 24px;
+        transition:
+                transform 0.35s var(--ease),
+                box-shadow 0.35s var(--ease),
+                border-color 0.35s var(--ease);
+}
+.explore-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--rust);
+        box-shadow: 0 22px 50px rgba(19, 41, 59, 0.1);
+}
+.explore-card h2 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+}
+.explore-card p {
+        font-size: 0.92rem;
+        color: var(--ink-soft);
+        flex: 1;
+}
+.explore-go {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--rust);
+}
+.explore-go span {
+        display: inline-block;
+        transition: transform 0.3s var(--ease);
+}
+.explore-card:hover .explore-go span {
+        transform: translateX(5px);
+}
+
+/* Previous / next page links */
+.page-pager {
+        background: var(--cream-2);
+        border-top: 1px solid var(--line);
+        padding: 34px 0;
+}
+.page-pager-inner {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+}
+.pager-link {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        transition: color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.pager-next {
+        text-align: right;
+        align-items: flex-end;
+}
+.pager-link:hover {
+        color: var(--rust);
+}
+.pager-prev:hover {
+        transform: translateX(-4px);
+}
+.pager-next:hover {
+        transform: translateX(4px);
+}
+.pager-k {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted);
+}
+.pager-v {
+        font-family: var(--font-display);
+        font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+        font-weight: 500;
+}
+
+/* Footer links */
+.footer-nav {
+        order: -1;
+        flex-basis: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 26px;
+        padding-bottom: 26px;
+        margin-bottom: 6px;
+        border-bottom: 1px solid rgba(243, 241, 234, 0.12);
+}
+.footer-nav a {
+        font-family: var(--font-mono);
+        font-size: 0.74rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(243, 241, 234, 0.72);
+        transition: color 0.3s var(--ease);
+}
+.footer-nav a:hover {
+        color: var(--cream);
+}
+
+.not-found-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+}
+
+@media (max-width: 1024px) {
+        .explore-grid {
+                grid-template-columns: repeat(2, 1fr);
+        }
+}
+@media (max-width: 720px) {
+        .section.page-first {
+                padding-top: 120px;
+        }
+        .explore-grid {
+                grid-template-columns: 1fr;
+        }
+        .footer-nav {
+                gap: 12px 20px;
+        }
+}
+@media (max-width: 420px) {
+        .c-card .c-value {
+                font-size: 0.95rem;
+                overflow-wrap: anywhere;
+        }
+}

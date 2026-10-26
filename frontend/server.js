@@ -16,11 +16,13 @@ const HTTP_NOT_FOUND = 404;
 const HTTP_SERVER_ERROR = 500;
 const HTTP_RANGE_NOT_SATISFIABLE = 416;
 
-const CACHE_CONTROL = "public, max-age=3600";
+const CACHE_HTML = "no-cache";
+const CACHE_ASSETS = "public, max-age=2592000";
 
 // Only these paths are publicly served. Everything else (backend/, .env,
 // .git/, source, config) is rejected so secrets and code are never exposed.
-const PUBLIC_FILES = new Set(["/index.html", "/admin.html", "/googlee2baf0cc1b65fae8.html", "/sitemap.xml", "/robots.txt", "/favicon.ico"]);
+const PAGES = ["index", "about", "flight-log", "education", "skills", "projects", "training-films", "gallery", "contact", "404", "admin", "googlee2baf0cc1b65fae8"];
+const PUBLIC_FILES = new Set([...PAGES.map((p) => `/${p}.html`), "/sitemap.xml", "/robots.txt", "/favicon.ico"]);
 const PUBLIC_DIRS = ["assets/", "css/", "js/"];
 
 const SECURITY_HEADERS = {
@@ -73,6 +75,10 @@ function parseRange(range, size) {
   return { start, end };
 }
 
+function cacheFor(filePath) {
+  return [".html", ".xml", ".txt"].includes(path.extname(filePath)) ? CACHE_HTML : CACHE_ASSETS;
+}
+
 // Serve a partial (206) response for Range requests (video seeking).
 function handleRangeRequest(req, res, filePath, stat, type) {
   const { start, end } = parseRange(req.headers.range, stat.size);
@@ -89,19 +95,19 @@ function handleRangeRequest(req, res, filePath, stat, type) {
     "Content-Range": `bytes ${start}-${end}/${stat.size}`,
     "Accept-Ranges": "bytes",
     "Content-Length": end - start + 1,
-    "Cache-Control": CACHE_CONTROL,
+    "Cache-Control": cacheFor(filePath),
   });
   fs.createReadStream(filePath, { start, end }).pipe(res);
 }
 
-// Serve a full (200) response.
-function serveFile(res, filePath, stat, type) {
-  res.writeHead(HTTP_OK, {
+// Serve a full response (200, or 404 for the not-found page).
+function serveFile(res, filePath, stat, type, status = HTTP_OK) {
+  res.writeHead(status, {
     ...SECURITY_HEADERS,
     "Content-Type": type,
     "Content-Length": stat.size,
     "Accept-Ranges": "bytes",
-    "Cache-Control": CACHE_CONTROL,
+    "Cache-Control": cacheFor(filePath),
   });
   fs.createReadStream(filePath).pipe(res);
 }
@@ -126,16 +132,16 @@ function resolvePath(reqUrl) {
   return resolved;
 }
 
-// Fall back to index.html (SPA-style) when the requested file is missing.
-function serveFallback(req, res) {
-  const indexPath = path.join(ROOT, "index.html");
-  fs.stat(indexPath, (err, stat) => {
+// Unknown or private paths get the branded 404 page with a real 404 status.
+function serveNotFound(res) {
+  const notFoundPath = path.join(ROOT, "404.html");
+  fs.stat(notFoundPath, (err, stat) => {
     if (err) {
       res.writeHead(HTTP_NOT_FOUND);
       res.end("Not found");
       return;
     }
-    serve(req, res, indexPath, stat);
+    serveFile(res, notFoundPath, stat, MIME[".html"], HTTP_NOT_FOUND);
   });
 }
 
@@ -143,13 +149,12 @@ const server = http.createServer((req, res) => {
   try {
     const resolved = resolvePath(req.url);
     if (!resolved) {
-      res.writeHead(HTTP_NOT_FOUND);
-      res.end("Not found");
+      serveNotFound(res);
       return;
     }
     fs.stat(resolved, (err, stat) => {
       if (err || !stat.isFile()) {
-        serveFallback(req, res);
+        serveNotFound(res);
         return;
       }
       serve(req, res, resolved, stat);

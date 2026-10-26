@@ -46,14 +46,20 @@ From the downloaded folder, you will upload **these** to Bluehost:
 
 ```
 index.html
+about.html, flight-log.html, education.html, skills.html,
+projects.html, training-films.html, gallery.html, contact.html
+404.html        (custom "page not found" page)
 css/            (whole folder)
-js/             (whole folder)
+js/             (whole folder — use bluehost/js-main-bluehost.js as js/main.js)
 assets/         (whole folder — images + videos + resume PDF)
 sitemap.xml
 robots.txt
 googlee2baf0cc1b65fae8.html   (Google verification file)
+bluehost/.htaccess  → upload as public_html/.htaccess (HTTPS redirect, 404 page, caching)
 contact.php     (you'll create this from Section 6)
 ```
+
+> All pages are generated from `src/` by `python3 scripts/build_site.py`. Edit content in `src/sections/*.html` or `src/data.json`, run the script, then upload the regenerated `.html` files, `sitemap.xml` and `robots.txt`.
 
 **Do NOT upload these** (they're backend/dev files and some contain secrets):
 ```

@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
-Disallow: /api/admin
+Disallow: /api/
+Disallow: /admin.html
 
-Sitemap: https://jacqmagawa.com/api/sitemap.xml
+Sitemap: https://jacqmagawa.com/sitemap.xml
