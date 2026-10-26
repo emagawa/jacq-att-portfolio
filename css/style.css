@@ -2693,3 +2693,14 @@ h2.checklist-subhead {
                 overflow-wrap: anywhere;
         }
 }
+@media (max-width: 720px) {
+        .sec-head--split {
+                grid-template-columns: auto 1fr;
+        }
+        .sec-head--split .sec-kicker {
+                grid-column: 2;
+                grid-row: 2;
+                text-align: left;
+                margin-top: 10px;
+        }
+}

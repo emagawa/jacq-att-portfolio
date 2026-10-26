@@ -1,0 +1,32 @@
+{
+  "summary": "Frontend-only test of the multi-page SEO rebuild (10 generated pages). Static SEO audit over the public URL: every page has exactly 1 <h1>, no skipped heading levels, unique titles of 34-56 chars, meta descriptions of 128-156 chars, canonical and og:url match https://jacqmagawa.com/<file> (home is /), full OG and Twitter tags, valid JSON-LD (@graph with Person/WebSite/WebPage plus BreadcrumbList), every img has alt text, no duplicate ids, no noindex on indexable pages (404 is noindex). All 89 internal refs resolve: links, img/srcset webp, posters, videos, gallery full images, PDF. robots.txt is text/plain with the correct Sitemap line. sitemap.xml lists 9 URLs, all 200 with lastmod. /.env, /backend/.env, /frontend/.env, /scripts, /src/data.json, /.git/config and /frontend/server.js return a branded 404; /nope returns 404 with notfound-home-btn. Playwright at 1920 and 390: no JS errors. Nav links (9) go to the right page, and the active link has class active and aria-current=page. Explore cards (8), breadcrumb-home, pager-prev/next (circular) and footer links work. Legacy anchors #gallery, #contact, #log and #films redirect. The mobile hamburger opens, closes and its links navigate. Films: 9 cards, and clicking film-media-0 adds video.film-fullvideo. Gallery: 20 items; the lightbox shows title and description, next/prev cycle and wrap, and Escape and the close button both close it and restore body overflow. Contact: the resume modal opens with an iframe and closes. Empty submit shows an error in contact-form-note. One real submission (QA Test / qa-test@example.com) returned 200 and showed the success note. Only minor cosmetic issues found.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "education.html @390px", "issues": ["The section-head kicker 'Degree · Certifications' (span.sec-kicker) runs 1px past the viewport (scrollWidth 391 vs 390). 'CERTIFICATIONS' touches the right edge. Allow wrapping or reduce letter-spacing for .sec-kicker on small screens."]},
+      {"screen": "Subpage headers @390px (projects, education, gallery, contact)", "issues": ["The number + H1 + right-aligned kicker sit on one row and feel cramped (e.g. 'Education & credentials' wraps to 3 lines). Consider stacking the kicker under the H1 on mobile."]},
+      {"screen": "gallery.html", "issues": ["#lightboxImg has src=\"\" in the markup, so it is counted as a broken image before the lightbox opens. Omit the src attribute until it is set by JS."]}
+    ]
+  },
+  "test_report_links": ["/app/tests/seo_static_check.py", "/app/tests/seo_assets_check.py"],
+  "action_items": [
+    "Optional: fix the .sec-kicker overflow on education.html at 390px",
+    "Optional: remove src=\"\" from #lightboxImg in the gallery source template",
+    "Optional SEO polish: some H1s are not keyword-rich ('Build Log', 'Cleared for Contact', 'Pre-Flight Checklist'). The skills page shows as 'Checklist' in the nav but its title and breadcrumb say 'Skills'. Consider aligning these."
+  ],
+  "critical_code_review_comments": [
+    "server.js allowlist works: private paths return 404. Extensionless clean URLs (/about) return 404 in preview and there is no rewrite in bluehost/.htaccess. That is fine because all canonicals, the sitemap and internal links use .html, but do not advertise extensionless URLs.",
+    "/404.html requested directly returns 200. It is noindex, so this is harmless.",
+    "main.js KNOWN_PATHS noindex fallback only matters if a host serves index.html for unknown paths. Harmless.",
+    "bluehost/js-main-bluehost.js must be kept in sync with js/main.js (today it differs only in CONTACT_ENDPOINT). Consider generating it from build_site.py to avoid drift.",
+    "Network failures seen were only Cloudflare /cdn-cgi/rum and GTM beacons (environment noise, not app issues)."
+  ],
+  "updated_files": ["/app/tests/seo_static_check.py", "/app/tests/seo_assets_check.py"],
+  "success_rate": {"backend": "N/A (skipped)", "frontend": "~98% (all functional checks pass; 3 minor cosmetic items)"},
+  "seed_data_creation": "One real contact form submission sent (name 'QA Test', qa-test@example.com).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run python3 /app/tests/seo_static_check.py and python3 /app/tests/seo_assets_check.py for SEO and link regression checks. They read the base URL from frontend/.env. The /%2e%2e/etc/passwd probe returns 400 from the ingress, which is acceptable. Headless Chromium cannot render the PDF iframe or decode H.264, which is expected."
+}
