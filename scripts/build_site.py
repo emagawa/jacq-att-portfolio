@@ -629,7 +629,7 @@ def recruiter_main():
                                 </ul>
                         </section>
                 </div>
-                <p class="recruiter-foot">Full portfolio: <a href="/">jacqmagawa.com</a> · <a href="/projects.html">Projects</a> · <a href="/training-films.html">Training films</a></p>
+                <p class="recruiter-foot"><a href="/" data-testid="recruiter-full-portfolio-link">Go to Full portfolio</a></p>
         </div>
 </article>"""
 
