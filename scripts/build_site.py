@@ -613,13 +613,13 @@ def recruiter_main():
                                         <li><b>Organization</b><span>Relied on daily for coursework and flight training</span></li>
                                 </ul>
                         </section>
-                        <section class="recruiter-block recruiter-wide reveal" aria-labelledby="rs-projects">
+                        <section class="recruiter-block reveal" aria-labelledby="rs-projects">
                                 <h2 id="rs-projects">Projects</h2>
                                 <ul class="recruiter-list">
 {indent(projects, 40)}
                                 </ul>
                         </section>
-                        <section class="recruiter-block recruiter-wide reveal" aria-labelledby="rs-flight">
+                        <section class="recruiter-block reveal" aria-labelledby="rs-flight">
                                 <h2 id="rs-flight">Flight training highlights</h2>
                                 <ul class="recruiter-list">
                                         <li><b>2011</b><span>First flight with the EAA Young Eagles program, age 11</span></li>
