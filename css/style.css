@@ -3130,3 +3130,6 @@ h2.checklist-subhead {
 .recruiter-foot {
         text-align: center;
 }
+.recruiter-foot a {
+        font-size: 1.1rem;
+}
