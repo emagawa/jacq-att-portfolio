@@ -120,3 +120,6 @@ Finish and polish the existing static portfolio for Jacqueline Magawa (aviation 
 - Helpers in server.py: compute_digest_stats(), build_digest_html(), send_weekly_digest(force).
 - NOTE: requires re-deploy (new dependency + backend routes + scheduler). In prod single uvicorn worker → one scheduler; dev reload shows 2 but the week-key guard prevents duplicate emails.
 
+
+## 2026-06 — Google Tag Manager
+- Added GTM-NPG82L6T: script at top of <head>, noscript iframe right after <body> in /app/index.html (also used for Bluehost upload). Verified dataLayer events fire.
