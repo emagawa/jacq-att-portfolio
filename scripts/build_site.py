@@ -555,7 +555,7 @@ def recruiter_main():
                 <header class="recruiter-head reveal">
                         <div>
                                 <p class="eyebrow"><span class="dot"></span>Recruiter summary</p>
-                                <h1>Jacqueline Magawa</h1>
+                                <h1>Jacqueline <span class="rust">Magawa</span></h1>
                                 <p class="recruiter-role">B.S. Computer Science, minor in Cybersecurity (University at Albany, 2027) · A.S. Aviation Management (2024)</p>
                         </div>
                         <div class="recruiter-actions no-print">
