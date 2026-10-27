@@ -2931,7 +2931,7 @@ h2.checklist-subhead {
         font-size: 0.9rem;
         color: var(--muted);
 }
-.recruiter-foot a {
+.recruiter-foot a:not(.btn) {
         color: var(--rust);
 }
 
@@ -3130,9 +3130,39 @@ h2.checklist-subhead {
 .recruiter-foot {
         text-align: center;
 }
-.recruiter-foot a {
+.recruiter-foot a:not(.btn) {
         font-size: 1.1rem;
 }
 .recruiter-head h1 .rust {
         color: var(--rust);
+}
+.print-only {
+        display: none;
+}
+.recruiter-qr {
+        margin: 0;
+        align-items: center;
+        gap: 10px;
+        text-align: left;
+}
+.recruiter-qr img {
+        width: 25mm;
+        height: 25mm;
+}
+.recruiter-qr figcaption {
+        font-size: 8pt;
+        line-height: 1.35;
+        color: var(--ink-soft);
+}
+@media print {
+        .print-only {
+                display: flex;
+        }
+        .recruiter-head {
+                align-items: center;
+                flex-wrap: nowrap;
+        }
+        .recruiter-foot {
+                display: none;
+        }
 }

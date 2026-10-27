@@ -562,6 +562,10 @@ def recruiter_main():
                                 <button type="button" class="btn btn-rust" data-print data-testid="recruiter-print-btn">Print / Save as PDF</button>
                                 <a href="/assets/resume-jacqueline-magawa.pdf" download class="btn btn-ghost" data-testid="recruiter-resume-btn">Download Résumé</a>
                         </div>
+                        <figure class="recruiter-qr print-only" data-testid="recruiter-qr">
+                                <img src="/assets/img/qr-portfolio.svg" width="132" height="132" alt="QR code linking to jacqmagawa.com" />
+                                <figcaption>Scan for the full portfolio<br /><b>jacqmagawa.com</b></figcaption>
+                        </figure>
                 </header>
                 <div class="recruiter-grid">
                         <section class="recruiter-block reveal" aria-labelledby="rs-seeking">
@@ -629,7 +633,7 @@ def recruiter_main():
                                 </ul>
                         </section>
                 </div>
-                <p class="recruiter-foot"><a href="/" data-testid="recruiter-full-portfolio-link">Back Home</a></p>
+                <p class="recruiter-foot"><a href="/" class="btn btn-ghost" data-testid="recruiter-full-portfolio-link">Back Home</a></p>
         </div>
 </article>"""
 
